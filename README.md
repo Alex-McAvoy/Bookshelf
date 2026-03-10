@@ -1,11 +1,5 @@
-
-
-<!--
- * @Description   
- * @Author        Alex_McAvoy
- * @Date          2026-03-10 16:10:57
--->
 # Bookshelf
+
 托管于个人博客中的电子书架，个人阅读记录
 
 git 提交规范
