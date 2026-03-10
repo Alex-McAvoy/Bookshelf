@@ -13,3 +13,187 @@ body {
         color: #DEDEDC;
     }
 }
+
+.bookCollection {
+    clear: both;
+}
+
+.bookCollection h1 .count {
+    margin: 0 10px 0 10px;
+    padding: 0 10px 0 10px;
+    vertical-align: 3px;
+    font-size: 24px;
+    font-weight: normal;
+    border-radius: 15px;
+    background: #ddd;
+    color: #666;
+}
+
+@media (prefers-color-scheme: dark) {
+    .bookCollection h1 .count {
+        background: #666;
+        color: #bbb;
+    }
+}
+
+.bookList {
+    clear: both;
+}
+
+.bookList .readMonth,
+.bookList .readYear {
+    display: none;
+    clear: both;
+    padding: 40px 0 20px 0;
+    height: 30px;
+    line-height: 30px;
+    font-size: 26px;
+    font-weight: bold;
+    color: #555;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .bookList .readMonth,
+    .bookList .readYear {
+        color: #DEDEDC;
+    }
+}
+
+.bookList .readMonth .count,
+.bookList .readYear .count {
+    margin: 0 0 0 10px;
+    padding: 0 10px 0 10px;
+    vertical-align: 1px;
+    font-size: 22px;
+    font-weight: normal;
+    border-radius: 15px;
+    background: #ddd;
+    color: #666;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .bookList .readMonth .count,
+    .bookList .readYear .count {
+        background: #666;
+        color: #bbb;
+    }
+}
+
+.bookCollection.group-month .bookList .readMonth,
+.bookCollection.group-year .bookList .readYear {
+    display: block;
+}
+
+.bookCollection.bookInfo-onlyBigImage .bookList .book {
+    margin: 0 10px 10px 0;
+    height: 280px;
+}
+
+.bookCollection.bookInfo-onlyBigImage .bookList .book .image img {
+    max-height: 280px;
+    height: 280px;
+    border-radius: 10px;
+}
+
+.bookCollection.bookInfo-onlySmallImage .bookList .book {
+    margin: 0 5px 5px 0;
+    width: 60px;
+    height: 85px;
+}
+
+.bookCollection.bookInfo-onlySmallImage .bookList .book .image img {
+    max-height: 85px;
+    height: 85px;
+    border-radius: 5px;
+}
+
+.bookCollection.bookInfo-onlyBigImage .bookList .book .detail,
+.bookCollection.bookInfo-onlySmallImage .bookList .book .detail {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    padding: 8px;
+    border: 1px solid #999;
+    background: white;
+    border-radius: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .bookCollection.bookInfo-onlyBigImage .bookList .book .detail,
+    .bookCollection.bookInfo-onlySmallImage .bookList .book .detail {
+        background: #333;
+    }
+}
+
+.bookCollection.bookInfo-onlyBigImage .bookList .book .detail {
+    top: 280px;
+    width: 184px;
+}
+
+.bookCollection.bookInfo-onlySmallImage .bookList .book .detail {
+    top: 85px;
+    width: 164px;
+}
+
+.bookCollection.bookInfo-onlyBigImage .bookList .book .detail .name {
+    position: static;
+}
+
+.bookCollection.bookInfo-onlySmallImage .bookList .book .detail .name {
+    position: static;
+    font-size: 16px;
+}
+
+.bookCollection.bookInfo-onlyBigImage .bookList .book .detail .media {
+    position: static;
+    float: left;
+    margin: 0 20px 0 0;
+    height: 20px;
+}
+
+.bookCollection.bookInfo-onlySmallImage .bookList .book .detail .media {
+    position: static;
+    float: left;
+    margin: 0 10px 0 0;
+}
+
+.bookCollection.bookInfo-onlyBigImage .bookList .book .detail .readDate,
+.bookCollection.bookInfo-onlySmallImage .bookList .book .detail .readDate {
+    position: static;
+    float: left;
+    height: 20px;
+}
+
+.bookCollection.bookInfo-onlyBigImage .bookList .book .detail .pagesIndicator,
+.bookCollection.bookInfo-onlySmallImage .bookList .book .detail .pagesIndicator {
+    position: static;
+    clear: both;
+    height: 20px;
+    background: transparent;
+}
+
+.bookCollection.bookInfo-onlyBigImage .bookList .book .detail .pagesIndicator.percent1,
+.bookCollection.bookInfo-onlySmallImage .bookList .book .detail .pagesIndicator.percent1 {
+    display: none;
+}
+
+.bookCollection.bookInfo-onlyBigImage .bookList .book .detail .pagesIndicator .pagesText,
+.bookCollection.bookInfo-onlySmallImage .bookList .book .detail .pagesIndicator .pagesText {
+    display: block;
+    position: static;
+}
+
+.bookCollection.bookInfo-onlyBigImage .bookList .book .detail .rating,
+.bookCollection.bookInfo-onlySmallImage .bookList .book .detail .rating {
+    position: static;
+    float: left;
+    height: 20px;
+}
+
+.bookCollection.bookInfo-onlyBigImage .bookList .book:hover .detail,
+.bookCollection.bookInfo-onlySmallImage .bookList .book:hover .detail {
+    display: block;
+}
