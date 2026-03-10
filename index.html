@@ -9,18 +9,33 @@
     <title>我读的书</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="Content-Language" content="zh-cn">
-    <script src="./resources/js/jquery-3.6.0.min.js"></script>
-    <script src="./resources/js/main.js"></script>
-    <style type="text/css"></style>
+    <script type="text/javascript" src="./resources/js/jquery-3.6.0.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="./resources/js/main.js" charset="UTF-8"></script>
+    <link rel="stylesheet" href="./resources/css/main.css"></link>
 </head>
 <body>
-    <div>Hello World</div>
+    <!-- 在读 -->
+    <div class="bookCollection media-所有介质" id="readingBooks">
+        <h1>在读<span class=count id="readingCount"></span></h1>
+    </div>
+
 </body>
 <script>
     $(function(){
         $.get("./resources/markdown/books.md", function(md){
-            let books = parseMarkdownTable(md);
-            console.log(books)
+            // 解析书籍信息
+            let BOOKS = parseMarkdownTable(md);
+            let read = BOOKS.read;
+            let reading = BOOKS.reading;
+            let bought = BOOKS.bought;
+            let suspended = BOOKS.suspended;
+            let purchase = BOOKS.purchase;
+
+            // 更新数量
+            $("#readingCount").text(reading.length);
+
+            // 渲染在读书籍
+            // $("#readingBooks").append(renderBookList(reading));
         });
     });
 </script>
