@@ -10,6 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="Content-Language" content="zh-cn">
     <script src="./resources/js/jquery-3.6.0.min.js"></script>
+    <script src="./resources/js/main.js"></script>
     <style type="text/css"></style>
 </head>
 <body>
@@ -17,7 +18,10 @@
 </body>
 <script>
     $(function(){
-        console.log("jQuery加载成功");
+        $.get("./resources/markdown/books.md", function(md){
+            let books = parseMarkdownTable(md);
+            console.log(books)
+        });
     });
 </script>
 </html>
