@@ -1,0 +1,15 @@
+* {
+    font-family: 仿宋, 微软雅黑;
+}
+
+body {
+    margin: 20px;
+    color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #48474B;
+        color: #DEDEDC;
+    }
+}
