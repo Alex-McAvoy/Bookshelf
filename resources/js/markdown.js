@@ -1,9 +1,10 @@
 /**
- * @Description   js函数文件
+ * @Description   markdown解析相关函数
  * @Author        Alex_McAvoy
  * @Date          2026-03-10 21:22:43
  **/
 
+// 解析书籍信息
 function parseMarkdownTable(md) {
     // 按行分割
     let lines = md.split("\n").map(v => v.trim());
@@ -36,7 +37,7 @@ function parseMarkdownTable(md) {
         "read": [],
         // 在读
         "reading": [],
-        // 已购
+        // 已购买
         "bought": [],
         // 暂停
         "suspended": [],
@@ -46,7 +47,7 @@ function parseMarkdownTable(md) {
     let stateMap = {
         "读过": "read",
         "在读": "reading",
-        "购买": "bought",
+        "已购买": "bought",
         "暂停": "suspended",
         "计划购买": "purchase"
     };
@@ -57,7 +58,7 @@ function parseMarkdownTable(md) {
 
         if (stateEN && result[stateEN]) {
             result[stateEN].push(book);
-        } 
+        }
     });
     return result;
 }
