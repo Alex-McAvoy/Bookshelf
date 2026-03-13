@@ -1,0 +1,67 @@
+/*
+ * @Description   书籍列表与单本书
+ * @Author        Alex_McAvoy
+ * @Date          2026-03-13 14:04:20
+ */
+.bookList {
+  clear: both;
+}
+
+.book {
+  position: relative;
+  margin: 0 48px 70px 0;
+  width: 200px;
+  height: 420px;
+  float: left;
+}
+
+.book .image img {
+  width: 100%;
+  max-height: 300px;
+}
+
+.book .name {
+  position: absolute;
+  top: 310px;
+  font-size: 18px;
+  font-weight: bold;
+  max-height: 50px;
+  overflow: hidden;
+}
+
+.book .media, 
+.book .readDate {
+  position: absolute;
+  bottom: 30px;
+  font-size: 14px;
+  color: #aaa;
+  line-height: 22px;
+}
+
+.book .pagesIndicator {
+  position: absolute;
+  bottom: 25px;
+  height: 3px;
+  background: #ddd;
+  border-radius: 5px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .book .pagesIndicator {
+    background: #999;
+  }
+}
+
+.book .pagesIndicator .pagesText {
+  display: none;
+  position: absolute;
+  top: 3px;
+  width: 200px;
+  font-size: 14px;
+  color: #aaa;
+  line-height: 22px;
+}
+
+.book .pagesIndicator:hover .pagesText {
+  display: block;
+}
