@@ -29,20 +29,27 @@
         <h1>读过 <span class="count" id="readCount"></span></h1>
         <div class="options media" id="readMediaOptions">
             <div class="option meida-all" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">all</div>
-            <div class="option meida-all" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">纸质书</div>
-            <div class="option meida-all" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">电子书</div>
+            <div class="option meida-纸质书" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">纸质书</div>
+            <div class="option meida-电子书" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">电子书</div>
         </div>
-        <div class="options pagesRange" id="readPagesOptions">
+        <div class="options pagesRange" id="readPagesOptions" style="display:none;">
             <div class="option pagesRange-all" onclick="setOption('readBooks', 'pagesRange', 'all');refreshBookList('readBooks');">all</div>
             <div class="option pagesRange-200页以下" onclick="setOption('readBooks', 'pagesRange', '200页以下');refreshBookList('readBooks');">200页以下</div>
             <div class="option pagesRange-200到500页" onclick="setOption('readBooks', 'pagesRange', '200到500页');refreshBookList('readBooks');">200页以下</div>
             <div class="option pagesRange-500到1000页" onclick="setOption('readBooks', 'pagesRange', '500到1000页');refreshBookList('readBooks');">200页以下</div>
             <div class="option pagesRange-1000页以上" onclick="setOption('readBooks', 'pagesRange', '1000页以上');refreshBookList('readBooks');">200页以下</div>
         </div>
+        <div class="options wordsRange" id="readWordsOptions" style="display:none;">
+            <div class="option wordsRange-all">all</div>
+            <div class="option wordsRange-50万字以下">50万字以下</div>
+            <div class="option wordsRange-50万到100万字">50万到100万字</div>
+            <div class="option wordsRange-100万到200万字">100万到200万字</div>
+            <div class="option wordsRange-200万字以上">200万字以上</div>
+        </div>
         <div class="options group">
-            <div class="option group-month" onclick="setOption('readBooks', 'group', 'month')">月</div>
-            <div class="option group-year" onclick="setOption('readBooks', 'group', 'year')">年</div>
             <div class="option group-none" onclick="setOption('readBooks', 'group', 'none')">不分组</div>
+            <div class="option group-year" onclick="setOption('readBooks', 'group', 'year')">年</div>
+            <div class="option group-month" onclick="setOption('readBooks', 'group', 'month')">月</div>
         </div>
         <div class="options bookInfo">
             <div class="option bookInfo-detail" onclick="setOption('readBooks', 'bookInfo', 'detail')">显示书详情</div>
@@ -121,6 +128,24 @@
                     showReadDate: false
                 })
             );
+            
+            // 点击媒介按钮
+            var $mediaOptions = $("#readMediaOptions .option");
+            var $pageOptions = $("#readPagesOptions");
+            var $wordsOptions = $("#readWordsOptions");
+            $mediaOptions.on("click", function () {
+                var media = $(this).text();
+                if (media === "all") {
+                    $pageOptions.hide();
+                    $wordsOptions.hide();
+                } else if (media === "纸质书") {
+                    $pageOptions.show();
+                    $wordsOptions.hide();
+                } else if (media === "电子书") {
+                    $pageOptions.hide();
+                    $wordsOptions.show();
+                }
+            });
         });
     });
 </script>
