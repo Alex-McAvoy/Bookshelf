@@ -24,6 +24,38 @@
         <div id="readingBookList"></div>
     </div>
 
+    <!-- 读过 -->
+    <div class="bookCollection media-all pagesRange-all" id="readBooks">
+        <h1>读过 <span class="count" id="readCount"></span></h1>
+        <div class="options media" id="readMediaOptions">
+            <div class="option meida-all" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">all</div>
+            <div class="option meida-all" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">纸质书</div>
+            <div class="option meida-all" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">电子书</div>
+        </div>
+        <div class="options pagesRange" id="readPagesOptions">
+            <div class="option pagesRange-all" onclick="setOption('readBooks', 'pagesRange', 'all');refreshBookList('readBooks');">all</div>
+            <div class="option pagesRange-200页以下" onclick="setOption('readBooks', 'pagesRange', '200页以下');refreshBookList('readBooks');">200页以下</div>
+            <div class="option pagesRange-200到500页" onclick="setOption('readBooks', 'pagesRange', '200到500页');refreshBookList('readBooks');">200页以下</div>
+            <div class="option pagesRange-500到1000页" onclick="setOption('readBooks', 'pagesRange', '500到1000页');refreshBookList('readBooks');">200页以下</div>
+            <div class="option pagesRange-1000页以上" onclick="setOption('readBooks', 'pagesRange', '1000页以上');refreshBookList('readBooks');">200页以下</div>
+        </div>
+        <div class="options group">
+            <div class="option group-month" onclick="setOption('readBooks', 'group', 'month')">月</div>
+            <div class="option group-year" onclick="setOption('readBooks', 'group', 'year')">年</div>
+            <div class="option group-none" onclick="setOption('readBooks', 'group', 'none')">不分组</div>
+        </div>
+        <div class="options bookInfo">
+            <div class="option bookInfo-detail" onclick="setOption('readBooks', 'bookInfo', 'detail')">显示书详情</div>
+            <div class="option bookInfo-onlyBigImage" onclick="setOption('readBooks', 'bookInfo', 'onlyBigImage')">仅大图</div>
+            <div class="option bookInfo-onlySmallImage" onclick="setOption('readBooks', 'bookInfo', 'onlySmallImage')">仅小图</div>
+        </div>
+        <div class="options order" id="readOrderOptions">
+            <div class="option order-date" onclick="setOption('readBooks', 'order', 'date');refreshBookList('readBooks');">date</div>
+            <div class="option order-rating" onclick="setOption('readBooks', 'order', 'rating');refreshBookList('readBooks');">rating</div>
+        </div>
+        <div id="readBookList"></div>
+    </div>
+
     <!-- 已购买 -->
     <div class="bookCollection media-all pagesRange-all" id="boughtBooks">
         <h1>已购买 <span class="count" id="boughtCount"></span></h1>
@@ -34,14 +66,6 @@
     <div class="bookCollection media-all pagesRange-all" id="purchaseBooks">
         <h1>计划购买 <span class="count" id="purchaseCount"></span></h1>
         <div id="purchaseBookList"></div>
-    </div>
-
-    <!-- 读过 -->
-    <div class="bookCollection media-all pagesRange-all" id="readBooks">
-        <h1>读过 <span class="count" id="readCount"></span></h1>
-        <!-- <div class="options media" id="readMediaOptions"></div> -->
-        <!-- <div class="options pagesRange" id="readPagesOptions"></div> -->
-        <div id="readBookList"></div>
     </div>
 </body>
 <script>
@@ -68,6 +92,16 @@
                 })
             );
 
+            // 渲染读过
+            $("#readCount").text(BOOKS.read.length);
+            $("#readBookList").html(
+                renderBookList(BOOKS.read, {
+                    showComment: true,
+                    showRating: true,
+                    showReadDate: true
+                })
+            );
+
             // 渲染已购买
             $("#boughtCount").text(BOOKS.bought.length);
             $("#boughtBookList").html(
@@ -87,31 +121,6 @@
                     showReadDate: false
                 })
             );
-
-            // 渲染读过
-            $("#readCount").text(BOOKS.read.length);
-            $("#readBookList").html(
-                renderBookList(BOOKS.read, {
-                    showComment: true,
-                    showRating: true,
-                    showReadDate: true
-                })
-            );
-
-
-            // 渲染已购买书架的媒介按钮
-            // $("#boughtMediaOptions").empty(); 
-            // ["all", "纸质书", "电子书"].forEach(function (media) {
-            //     var $btn = renderMediaOptionButton(media, BOOKS.bought, "boughtBooks");
-            //     if ($btn) $("#boughtMediaOptions").append($btn);
-            // });
-
-            // // 渲染已购买书架的页数范围按钮
-            // $("#boughtPagesOptions").empty(); 
-            // ["all", "未知", "200页以下", "200到500页", "500到1000页", "1000页以上"].forEach(function (range) {
-            //     var $btn = renderPagesRangeOptionButton(range, BOOKS.bought, "boughtBooks");
-            //     if ($btn) $("#boughtPagesOptions").append($btn);
-            // });
         });
     });
 </script>
