@@ -4,6 +4,28 @@
  * @Date          2026-03-12 22:23:02
  **/
 
+// 切换书籍显示样式
+function setBookInfoOption(optionValue) {
+    const bookIds = ["readingBookList", "readBookList", "boughtBookList", "purchaseBookList"];
+    bookIds.forEach(id => {
+        var $el = $("#" + id);
+        $el.removeClass(function (index, className) {
+            return (className.match(/bookInfo-\S+/g) || []).join(" ");
+        });
+        $el.addClass("bookInfo-" + optionValue);
+
+        if(optionValue === "detail") {
+            $el.find(".detail").removeClass("hidden");
+            $el.find(".info").addClass("hidden");
+        } else {
+            $el.find(".detail").addClass("hidden");
+            $el.find(".info").removeClass("hidden");
+        }
+    });
+}
+
+
+
 // 获取媒介数量
 function getMediaCount(bookList, media) {
     if (!bookList) return 0;

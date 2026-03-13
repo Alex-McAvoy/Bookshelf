@@ -121,7 +121,11 @@ function renderBookList(bookList, options) {
         var $book = $("<div>").addClass("book");
         var $image = $("<div>").addClass("image");
         var $detail = $("<div>").addClass("detail");
-
+        var $info = $("<div>").addClass("info hidden");
+        // 详情模式
+        getBookImageUrl(book, function (imgURL) {
+            $image.append($("<img>").attr("src", imgURL))
+        });
         $detail.append($("<div>").addClass("name").text(book.name));
         $detail.append($("<div>").addClass("authorNation")
             .append($("<span>").text(book.nation))
@@ -129,11 +133,14 @@ function renderBookList(bookList, options) {
         $detail.append($("<div>").addClass("category").text("类别：" + (book.category ?  book.category : "暂无")));
         $detail.append($("<div>").addClass("publisher").text("出版社：" + (book.publisher ? book.publisher : "暂无")));
         $detail.append($("<div>").addClass("ISBN").text("ISBN：" + (book.ISBN ? book.ISBN : "暂无")));
-
-        getBookImageUrl(book, function (imgURL) {
-            $image.append($("<img>").attr("src", imgURL))
-        });
-
+        // 大图/小图模式
+        $info.append($("<div>").addClass("name").text(book.name));
+        $info.append($("<div>").addClass("authorNation")
+            .append($("<span>").text(book.nation))
+            .append($("<span>").text(book.author)));
+        $info.append($("<div>").addClass("category").text("类别：" + (book.category ?  book.category : "暂无")));
+        $info.append($("<div>").addClass("publisher").text("出版社：" + (book.publisher ? book.publisher : "暂无")));
+        $info.append($("<div>").addClass("ISBN").text("ISBN：" + (book.ISBN ? book.ISBN : "暂无")));
 
         // 页数或字数
         if (showPagesOrWords) {
@@ -172,6 +179,7 @@ function renderBookList(bookList, options) {
 
         $book.append($image);
         $book.append($detail);
+        $book.append($info);
         $list.append($book);
     });
 

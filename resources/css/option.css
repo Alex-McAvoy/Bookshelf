@@ -4,11 +4,12 @@
  * @Date          2026-03-13 14:04:44
  */
 .options {
-  float: left;
-  height: 40px;
-  padding: 3px;
+  display: flex;             /* 横向排列按钮 */
+  flex-wrap: wrap;           /* 换行显示，避免挤在一行 */
+  gap: 10px;                 /* 按钮间距 */
+  padding: 5px 0;            /* 上下间距 */
+  background: #f0f0f0;       /* 背景色淡一点 */
   border-radius: 8px;
-  background: #ddd;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,48 +19,46 @@
 }
 
 .options .option {
-  float: left;
-  height: 40px;
-  line-height: 40px;
-  font-size: 20px;
+  flex: 0 0 auto;            /* 宽度自适应内容 */
+  padding: 8px 16px;         /* 内边距足够宽松 */
+  font-size: 16px;           /* 稍大字体 */
   font-weight: bold;
-  cursor: pointer;
   text-align: center;
+  cursor: pointer;
   color: #555;
+  background: #ddd;
   border-radius: 6px;
+  transition: all 0.2s;
+  white-space: nowrap;       /* 不换行文字 */
+}
+
+.options .option:hover {
+  background: #bbb;
 }
 
 @media (prefers-color-scheme: dark) {
   .options .option {
-    color: #bbb;
+    background: #444;
+    color: #ccc;
+  }
+  .options .option:hover {
+    background: #555;
   }
 }
 
 .options .option .count {
-  margin-left: 3px;
+  margin-left: 6px;
   padding: 0 8px;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: normal;
-  border-radius: 15px;
+  border-radius: 12px;
   background: #c0c0c0;
   color: #777;
 }
 
 @media (prefers-color-scheme: dark) {
   .options .option .count {
-    background: #444;
-    color: #999;
+    background: #555;
+    color: #ccc;
   }
-}
-
-/* 不同类型按钮 padding */
-.options.media .option,
-.options.pagesRange .option {
-  padding: 0 12px;
-}
-
-/* PagesRange / WordsRange 间距 */
-.options.pagesRange {
-  clear: left;
-  margin: 20px 0;
 }

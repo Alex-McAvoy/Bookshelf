@@ -24,6 +24,7 @@
 </head>
 
 <body>
+    <!-- 书籍样式切换 -->
     <div class="bookInfo-switch">
         <div class="bookInfo-detail button-switch" onclick="setBookInfoOption('detail')">显示详情</div>
         <div class="bookInfo-bigImage button-switch" onclick="setBookInfoOption('bigImage')">仅大图</div>
@@ -33,7 +34,7 @@
     <div class="bookCollectionWrapper">
         <div class="bookCollection media-all pagesRange-all" id="readingBooks">
             <h1>在读 <span class="count" id="readingCount"></span></h1>
-            <div id="readingBookList"></div>
+            <div id="readingBookList" class="bookInfo-detail"></div>
         </div>
     </div>
 
@@ -70,7 +71,7 @@
             <div class="option order-date" onclick="setOption('readBooks', 'order', 'date');refreshBookList('readBooks');">date</div>
             <div class="option order-rating" onclick="setOption('readBooks', 'order', 'rating');refreshBookList('readBooks');">rating</div>
         </div> -->
-            <div id="readBookList"></div>
+            <div id="readBookList" class="bookInfo-detail"></div>
         </div>
     </div>
 
@@ -78,14 +79,14 @@
     <div class="bookCollectionWrapper">
         <div class="bookCollection media-all pagesRange-all" id="boughtBooks">
             <h1>已购买 <span class="count" id="boughtCount"></span></h1>
-            <div id="boughtBookList"></div>
+            <div id="boughtBookList" class="bookInfo-detail"></div>
         </div>
     </div>
     <!-- 计划购买 -->
     <div class="bookCollectionWrapper">
         <div class="bookCollection media-all pagesRange-all" id="purchaseBooks">
             <h1>计划购买 <span class="count" id="purchaseCount"></span></h1>
-            <div id="purchaseBookList"></div>
+            <div id="purchaseBookList" class="bookInfo-detail"></div>
         </div>
     </div>
 </body>
