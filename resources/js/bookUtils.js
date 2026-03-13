@@ -79,7 +79,7 @@ function renderPagesIndicator(className, pages, base) {
 
 // 获取书籍封面
 function getBookImageUrl(book, callback) {
-    var basePath = "./resources/images/";
+    var basePath = "./resources/images/books/";
 
     // 尝试加载jpg
     var $testImg = $("<img>").on("load", function () {
