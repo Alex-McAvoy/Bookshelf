@@ -18,12 +18,15 @@
     <link rel="stylesheet" href="./resources/css/bookCollection.css">
     <link rel="stylesheet" href="./resources/css/book.css">
     <link rel="stylesheet" href="./resources/css/option.css">
-    <link rel="stylesheet" href="./resources/css/comment.css">
-    <link rel="stylesheet" href="./resources/css/rating.css">
     <link rel="stylesheet" href="./resources/css/active.css">
 </head>
 
 <body>
+    <div class="options bookInfo">
+        <div class="option bookInfo-detail" onclick="setOption('readBooks', 'bookInfo', 'detail')">显示书详情</div>
+        <div class="option bookInfo-onlyBigImage" onclick="setOption('readBooks', 'bookInfo', 'onlyBigImage')">仅大图</div>
+        <div class="option bookInfo-onlySmallImage" onclick="setOption('readBooks', 'bookInfo', 'onlySmallImage')">仅小图</div>
+    </div>
     <!-- 在读 -->
     <div class="bookCollection media-all pagesRange-all" id="readingBooks">
         <h1>在读 <span class="count" id="readingCount"></span></h1>
@@ -57,11 +60,7 @@
             <div class="option group-year" onclick="setOption('readBooks', 'group', 'year')">年</div>
             <div class="option group-month" onclick="setOption('readBooks', 'group', 'month')">月</div>
         </div>
-        <div class="options bookInfo">
-            <div class="option bookInfo-detail" onclick="setOption('readBooks', 'bookInfo', 'detail')">显示书详情</div>
-            <div class="option bookInfo-onlyBigImage" onclick="setOption('readBooks', 'bookInfo', 'onlyBigImage')">仅大图</div>
-            <div class="option bookInfo-onlySmallImage" onclick="setOption('readBooks', 'bookInfo', 'onlySmallImage')">仅小图</div>
-        </div>
+        
         <div class="options order" id="readOrderOptions">
             <div class="option order-date" onclick="setOption('readBooks', 'order', 'date');refreshBookList('readBooks');">date</div>
             <div class="option order-rating" onclick="setOption('readBooks', 'order', 'rating');refreshBookList('readBooks');">rating</div>
@@ -133,7 +132,7 @@
                     showReadDate: false
                 })
             );
-            
+
             // 点击媒介按钮
             var $mediaOptions = $("#readMediaOptions .option");
             var $pageOptions = $("#readPagesOptions");

@@ -90,6 +90,58 @@
   margin-bottom: 2px;
 }
 
+.book .comment {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.book .comment .icon {
+  display: inline-block;
+  color: gray;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.book .comment .content {
+  display: none;
+  position: absolute;
+  top: 22px;
+  left: 0;
+  width: 180px;
+  background: #F8DFA4;
+  border: 1px solid #aaa;
+  padding: 6px 8px;
+  border-radius: 6px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+  font-size: 13px;
+  line-height: 1.5em;
+  color: #555;
+  z-index: 20;
+  word-break: break-all;
+}
+
+.book .comment:hover .content {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  .book .comment .icon {
+    color: #aaa;
+  }
+
+  .book .comment .content {
+    background: #5a4a2c;
+    border: 1px solid #777;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    color: #ddd;
+  }
+}
+
 .book .comment .content {
   display: none;
   position: absolute;
@@ -107,6 +159,30 @@
 
 .book .comment:hover .content {
   display: block;
+}
+
+.book .rating {
+  margin-top: 0;
+  margin-left: auto;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 2px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.book .rating .star {
+  color: #F5B943;
+}
+
+.book .rating .hollowStar {
+  color: #ccc;
+}
+
+@media (prefers-color-scheme: dark) {
+  .book .rating .hollowStar {
+    color: #666;
+  }
 }
 
 .book .detail .bookFooter {
