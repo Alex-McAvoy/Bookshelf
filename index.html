@@ -18,83 +18,100 @@
 </head>
 
 <body>
-    <!-- 在读书架 -->
+    <!-- 在读 -->
     <div class="bookCollection media-all pagesRange-all" id="readingBooks">
         <h1>在读 <span class="count" id="readingCount"></span></h1>
-        <!-- 书籍列表渲染占位 -->
         <div id="readingBookList"></div>
     </div>
 
-    <!-- 已购买书架 -->
+    <!-- 已购买 -->
     <div class="bookCollection media-all pagesRange-all" id="boughtBooks">
         <h1>已购买 <span class="count" id="boughtCount"></span></h1>
-        <!-- 媒介按钮占位 -->
-        <div class="options media" id="boughtMediaOptions"></div>
-        <!-- 页数范围按钮占位 -->
-        <div class="options pagesRange" id="boughtPagesOptions"></div>
-        <!-- 书籍列表渲染占位 -->
         <div id="boughtBookList"></div>
     </div>
 
+    <!-- 计划购买 -->
+    <div class="bookCollection media-all pagesRange-all" id="purchaseBooks">
+        <h1>计划购买 <span class="count" id="purchaseCount"></span></h1>
+        <div id="purchaseBookList"></div>
+    </div>
+
+    <!-- 读过 -->
+    <div class="bookCollection media-all pagesRange-all" id="readBooks">
+        <h1>读过 <span class="count" id="readCount"></span></h1>
+        <!-- <div class="options media" id="readMediaOptions"></div> -->
+        <!-- <div class="options pagesRange" id="readPagesOptions"></div> -->
+        <div id="readBookList"></div>
+    </div>
 </body>
 <script>
     $(function () {
         // 读取书籍数据
         $.get("./resources/markdown/books.md", function (md) {
+            // 解析书籍信息
             var BOOKS = parseMarkdownTable(md);
-
-            // 全局书籍对象映射 DOM id -> 数组
             window.BOOK_COLLECTIONS = {
                 readingBooks: BOOKS.reading,
                 boughtBooks: BOOKS.bought,
-                readingHistory: BOOKS.read,
                 suspendedBooks: BOOKS.suspended,
+                readingHistory: BOOKS.read,
                 purchaseBooks: BOOKS.purchase
             };
 
-            // 更新在读数量
+            // 渲染在读
             $("#readingCount").text(BOOKS.reading.length);
-
-            // 渲染在读书架
             $("#readingBookList").html(
                 renderBookList(BOOKS.reading, {
-                    showPagesOrWords: null,
-                    showPublisher: true,
-                    showISBN: true,
-                    showImage: true,
-                    showMedia: true,
-                    order: "ReadYearAndRating"
+                    showComment: false,
+                    showRating: false,
+                    showReadDate: false
                 })
             );
 
-            // 更新已购买数量
+            // 渲染已购买
             $("#boughtCount").text(BOOKS.bought.length);
-
-            // 渲染已购买书架的媒介按钮
-            $("#boughtMediaOptions").empty(); 
-            ["all", "纸质书", "电子书"].forEach(function (media) {
-                var $btn = renderMediaOptionButton(media, BOOKS.bought, "boughtBooks");
-                if ($btn) $("#boughtMediaOptions").append($btn);
-            });
-
-            // 渲染已购买书架的页数范围按钮
-            $("#boughtPagesOptions").empty(); 
-            ["all", "未知", "200页以下", "200到500页", "500到1000页", "1000页以上"].forEach(function (range) {
-                var $btn = renderPagesRangeOptionButton(range, BOOKS.bought, "boughtBooks");
-                if ($btn) $("#boughtPagesOptions").append($btn);
-            });
-
-            // 渲染已购买书籍列表
             $("#boughtBookList").html(
                 renderBookList(BOOKS.bought, {
-                    showPagesOrWords: true,
-                    showPublisher: true,
-                    showISBN: true,
-                    showImage: true,
-                    showMedia: true,
-                    order: "ReadYearAndRating"
+                    showComment: false,
+                    showRating: false,
+                    showReadDate: false
                 })
             );
+
+            // 渲染计划购买
+            $("#purchaseCount").text(BOOKS.purchase.length);
+            $("#purchaseBookList").html(
+                renderBookList(BOOKS.purchase, {
+                    showComment: false,
+                    showRating: false,
+                    showReadDate: false
+                })
+            );
+
+            // 渲染读过
+            $("#readCount").text(BOOKS.read.length);
+            $("#readBookList").html(
+                renderBookList(BOOKS.read, {
+                    showComment: false,
+                    showRating: false,
+                    showReadDate: false
+                })
+            );
+
+
+            // 渲染已购买书架的媒介按钮
+            // $("#boughtMediaOptions").empty(); 
+            // ["all", "纸质书", "电子书"].forEach(function (media) {
+            //     var $btn = renderMediaOptionButton(media, BOOKS.bought, "boughtBooks");
+            //     if ($btn) $("#boughtMediaOptions").append($btn);
+            // });
+
+            // // 渲染已购买书架的页数范围按钮
+            // $("#boughtPagesOptions").empty(); 
+            // ["all", "未知", "200页以下", "200到500页", "500到1000页", "1000页以上"].forEach(function (range) {
+            //     var $btn = renderPagesRangeOptionButton(range, BOOKS.bought, "boughtBooks");
+            //     if ($btn) $("#boughtPagesOptions").append($btn);
+            // });
         });
     });
 </script>
