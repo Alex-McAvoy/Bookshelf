@@ -39,8 +39,6 @@ function parseMarkdownTable(md) {
         "reading": [],
         // 已购买
         "bought": [],
-        // 暂停
-        "suspended": [],
         // 计划购买
         "purchase": []
     }
@@ -48,7 +46,6 @@ function parseMarkdownTable(md) {
         "读过": "read",
         "在读": "reading",
         "已购买": "bought",
-        "暂停": "suspended",
         "计划购买": "purchase"
     };
     // 按state分类
