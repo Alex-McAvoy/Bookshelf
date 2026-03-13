@@ -108,18 +108,31 @@ function renderBookList(bookList, options) {
         // 封面
         var basePath = "./resources/images/books/";
         var imageSrc = (book.imageURL && book.imageURL.trim() !== "")
-        ? basePath + book.imageURL
-        : basePath + "samplebook.png";
+            ? basePath + book.imageURL
+            : basePath + "samplebook.png";
         $image.append($("<img>").attr("src", imageSrc));
 
         // 详情模式
-        $detail.append($("<div>").addClass("name").text(book.name));
-        $detail.append($("<div>").addClass("authorNation")
-            .append($("<span>").text(book.nation))
-            .append($("<span>").text(book.author)));
-        $detail.append($("<div>").addClass("category").text("类别：" + (book.category ? book.category : "暂无")));
-        $detail.append($("<div>").addClass("publisher").text("出版社：" + (book.publisher ? book.publisher : "暂无")));
-        $detail.append($("<div>").addClass("ISBN").text("ISBN：" + (book.ISBN ? book.ISBN : "暂无")));
+        $detail.append($("<div>").addClass("name").text("《" + book.name + "》"));
+        $detail.append(
+            $("<div>").addClass("authorNation")
+                .append($("<span>").text(book.nation + book.author))
+        );
+        $detail.append(
+            $("<div>").addClass("category")
+                .append($("<span>").text("类别："))
+                .append($("<span>").text(book.category ? book.category : "暂无"))
+        );
+        $detail.append(
+            $("<div>").addClass("publisher")
+                .append($("<span>").text("出版社："))
+                .append($("<span>").text(book.publisher ? book.publisher : "暂无"))
+        );
+        $detail.append(
+            $("<div>").addClass("ISBN")
+                .append($("<span>").text("ISBN："))
+                .append($("<span>").text(book.ISBN ? book.ISBN : "暂无"))
+        );
         if (showComment && book.comment) {
             $bookFooter.append(
                 $("<div>").addClass("comment")
@@ -141,27 +154,46 @@ function renderBookList(bookList, options) {
         }
 
         // 大图/小图模式
-        $info.append($("<div>").addClass("name").text("书名：" + book.name));
-        $info.append($("<div>").addClass("authorNation")
-            .append($("<span>").text("作者："))
-            .append($("<span>").text(book.nation))
-            .append($("<span>").text(book.author)));
-        $info.append($("<div>").addClass("category").text("类别：" + (book.category ? book.category : "暂无")));
-        $info.append($("<div>").addClass("publisher").text("出版社：" + (book.publisher ? book.publisher : "暂无")));
-        $info.append($("<div>").addClass("ISBN").text("ISBN：" + (book.ISBN ? book.ISBN : "暂无")));
+        $info.append(
+            $("<div>").addClass("name")
+                .append($("<span>").text("书名："))
+                .append($("<span>").text("《" + book.name + "》"))
+        );
+        $info.append(
+            $("<div>").addClass("authorNation")
+                .append($("<span>").text("作者："))
+                .append($("<span>").text(book.nation + book.author))
+        );
+        $info.append(
+            $("<div>").addClass("category")
+                .append($("<span>").text("类别："))
+                .append($("<span>").text(book.category ? book.category : "暂无"))
+        );
+        $info.append(
+            $("<div>").addClass("publisher")
+                .append($("<span>").text("出版社："))
+                .append($("<span>").text(book.publisher ? book.publisher : "暂无"))
+        );
+        $info.append(
+            $("<div>").addClass("ISBN")
+                .append($("<span>").text("ISBN："))
+                .append($("<span>").text(book.ISBN ? book.ISBN : "暂无"))
+        );
         if (showRating && book.rating) {
             var stars = ["", "★", "★★", "★★★", "★★★★", "★★★★★"];
             var hollowStars = ["", "☆☆☆☆", "☆☆☆", "☆☆", "☆", ""];
-            $info.append($("<div>").addClass("rating")
-                .append($("<span>").text("评分：")
-                    .append($("<span>").addClass("star").text(stars[Number(book.rating)]))
-                    .append($("<span>").addClass("hollowStar").text(hollowStars[Number(book.rating)])))
+            $info.append(
+                $("<div>").addClass("rating")
+                    .append($("<span>").text("评分："))
+                    .append($("<span>").text(stars[Number(book.rating)] + hollowStars[Number(book.rating)]))
             );
+
         }
         if (showComment && book.comment) {
-            $info.append($("<div>").addClass("rating")
-                .append($("<span>").text("备注：")
-                    .append($("<span>").addClass("content").text(book.comment)))
+            $info.append(
+                $("<div>").addClass("rating")
+                    .append($("<span>").text("备注："))
+                    .append($("<span>").text(book.comment))
             );
         }
 

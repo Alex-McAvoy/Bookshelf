@@ -6,7 +6,7 @@
 
 /* ---------------------- 详情模式 ---------------------- */
 .bookInfo-detail .bookList .book {
-  width: 200px;
+  width: 220px;
   margin: 15px;
   background: url("../images/common/bottom.png") no-repeat center bottom;
   background-size: 100% auto;
@@ -41,11 +41,23 @@
 }
 
 .bookInfo-detail .bookList .book .image {
-  width: 100%;
-  height: 280px;
+  width: calc(100% - 20px);
+  height: 260px;
+  margin: 10px auto 0 auto;
+  position: relative;
+  border-radius: 8px;
   overflow: hidden;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+}
+
+.bookInfo-detail .bookList .book .image::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: #ccc;
+  z-index: 10;
 }
 
 .bookInfo-detail .bookList .book .image img {
@@ -53,7 +65,6 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  border-bottom: 2px solid #ccc;
 }
 
 .bookInfo-detail .bookList .book .detail {
@@ -76,10 +87,23 @@
   margin-bottom: 2px;
 }
 
-.bookInfo-detail .bookList .book .detail span {
-  display: inline-block;
-  padding: 0;
-  font-size: 12px;
+.bookInfo-detail .bookList .book .detail > div.category,
+.bookInfo-detail .bookList .book .detail > div.publisher,
+.bookInfo-detail .bookList .book .detail > div.ISBN {
+  display: flex;
+  margin-bottom: 4px;
+  align-items: flex-start;
+}
+
+.bookInfo-detail .bookList .book .detail > div span:first-child {
+  flex: 0 0 60px;
+  font-weight: bold;
+}
+
+.bookInfo-detail .bookList .book .detail > div span:last-child {
+  flex: 1;
+  text-align: left;
+  word-break: break-word;
 }
 
 .bookInfo-detail .bookList .book .comment {
@@ -112,6 +136,8 @@
   font-size: 14px;
   color: #555;
   z-index: 10;
+  text-align: justify;
+  word-break: break-word;
 }
 
 .bookInfo-detail .bookList .book .comment:hover .content {
@@ -133,7 +159,7 @@
 }
 
 .bookInfo-detail .bookList .book .rating .hollowStar {
-  color: #ccc;
+  color: #555;
 }
 
 .bookInfo-detail .bookList .book .detail .bookFooter {
@@ -201,20 +227,41 @@
   position: absolute;
   top: 100%;
   left: 0;
-  width: 220px;
+  width: 240px;             /* 弹窗宽度，可根据需要调整 */
   display: none;
   background: #F8DFA4;
   border: 1px solid #aaa;
-  padding: 8px;
+  padding: 10px;
   border-radius: 6px;
   font-size: 14px;
-  line-height: 1.4em;
-  color: #555;
+  line-height: 1.5;
+  color: #333;
   z-index: 999;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
   word-break: break-word;
 }
 
+/* 每一行使用 flex 排列 */
+.book .info > div {
+  display: flex;
+  margin-bottom: 6px;
+  align-items: flex-start;   /* 垂直顶对齐 */
+}
+
+/* 标签列（带冒号） */
+.book .info > div span:first-child {
+  flex: 0 0 60px;           /* 标签固定宽度，冒号自然对齐 */
+  font-weight: bold;
+}
+
+/* 内容列 */
+.book .info > div span:last-child {
+  flex: 1;                   /* 占据剩余空间 */
+  text-align: left;
+  word-break: break-word;     /* 内容过长换行 */
+}
+
+/* hover 显示 */
 .bookInfo-bigImage .bookList .book:hover .info:not(.hidden),
 .bookInfo-smallImage .bookList .book:hover .info:not(.hidden) {
   display: block;
