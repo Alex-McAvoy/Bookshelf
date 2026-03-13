@@ -6,29 +6,21 @@
 
 * {
   font-family: 仿宋, 微软雅黑;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body {
-  margin: 20px;
+body {  
+  background: url("../images/bg.png") no-repeat center center fixed;
+  background-size: cover; 
   color-scheme: light dark;
+  margin: 20px;
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    background: #48474B;
     color: #DEDEDC;
   }
 }
 
-a {
-  color: black;
-  text-decoration: none;
-}
-a:visited {
-  color: black;
-}
-@media (prefers-color-scheme: dark) {
-  a, a:visited {
-    color: #DEDEDC;
-  }
-}
