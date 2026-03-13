@@ -1,0 +1,65 @@
+/*
+ * @Description   筛选按钮
+ * @Author        Alex_McAvoy
+ * @Date          2026-03-13 14:04:44
+ */
+.options {
+  float: left;
+  height: 40px;
+  padding: 3px;
+  border-radius: 8px;
+  background: #ddd;
+}
+
+@media (prefers-color-scheme: dark) {
+  .options {
+    background: #333;
+  }
+}
+
+.options .option {
+  float: left;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  color: #555;
+  border-radius: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .options .option {
+    color: #bbb;
+  }
+}
+
+.options .option .count {
+  margin-left: 3px;
+  padding: 0 8px;
+  font-size: 18px;
+  font-weight: normal;
+  border-radius: 15px;
+  background: #c0c0c0;
+  color: #777;
+}
+
+@media (prefers-color-scheme: dark) {
+  .options .option .count {
+    background: #444;
+    color: #999;
+  }
+}
+
+/* 不同类型按钮 padding */
+.options.media .option,
+.options.pagesRange .option {
+  padding: 0 12px;
+}
+
+/* PagesRange / WordsRange 间距 */
+.options.pagesRange {
+  clear: left;
+  margin: 20px 0;
+}
