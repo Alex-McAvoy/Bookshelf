@@ -77,6 +77,24 @@ function renderPagesIndicator(className, pages, base) {
         .append($("<div>").addClass("pagesText").text(pages + "页"));
 }
 
+// 获取书籍封面
+function getBookImageUrl(book, callback) {
+    var basePath = "./resources/images/";
+    
+    // 尝试加载jpg
+    var $testImg = $("<img>").on("load", function() {
+        callback(basePath + book.id + ".jpg");
+    }).on("error", function() {
+        // jpg加载失败，尝试加载png
+        var $testPng = $("<img>").on("load", function() {
+            callback(basePath + book.id + ".png");
+        }).on("error", function() {
+            // png加载失败，直接使用默认封面
+            callback(basePath + "samplebook.png");
+        }).attr("src", basePath + book.id + ".png");
+    }).attr("src", basePath + book.id + ".jpg");
+}
+
 // 渲染书架
 function renderBookList(bookList, options) {
     options = options || {};
@@ -102,8 +120,6 @@ function renderBookList(bookList, options) {
 
         // 书籍信息
         var $book = $("<div>").addClass("book");        
-        var imgURL = book.imageURL && book.imageURL.trim() !== "" ? book.imageURL : "./resources/images/samplebook.png";
-        $book.append($("<div>").addClass("image").append($("<img>").attr("src", imgURL)));
         var $detail = $("<div>").addClass("detail");
         $detail.append($("<div>").addClass("name").text(book.name));
         $detail.append($("<div>").addClass("author").text(book.author));
@@ -112,6 +128,9 @@ function renderBookList(bookList, options) {
         $detail.append($("<div>").addClass("publisher").text(book.publisher));
         $detail.append($("<div>").addClass("ISBN").text(book.ISBN));
         $detail.append($("<div>").addClass("media").text(book.media));
+        getBookImageUrl(book, function(imgURL) {
+            $book.append($("<div>").addClass("image").append($("<img>").attr("src", imgURL)));
+        });
 
         // 页数或字数
         if (showPagesOrWords) {
