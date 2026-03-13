@@ -8,6 +8,10 @@
   clear: both;
 }
 
+.bookCollection h1 {
+    text-align: center;
+}
+
 .bookCollection h1 .count {
   margin: 0 10px;
   padding: 0 10px;
@@ -24,4 +28,38 @@
     background: #666;
     color: #bbb;
   }
+}
+
+.bookCollectionWrapper {
+    background: url("../images/common/list_bg.png") no-repeat center top;
+    background-size: cover;
+    border-radius: 12px;
+    border: 2px solid #000;
+    padding: 20px;
+    margin: 20px 0;
+    position: relative;
+    box-shadow: 4px -4px 12px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+.bookCollectionWrapper::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.bookCollection h1 {
+    position: relative;
+    padding-bottom: 12px; /* 给分割图留出空间 */
+    margin-bottom: 20px;  /* 标题和书列表的间距 */
+}
+
+.bookCollection h1::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 8px; /* 根据图片高度调整 */
+    background: url("../images/common/divide.png") no-repeat center;
+    background-size: 90% 90%; /* 横向拉满，纵向拉伸到高度 */
+    margin-top: 20px;
 }

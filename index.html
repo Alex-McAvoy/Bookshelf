@@ -25,18 +25,22 @@
     <div class="options bookInfo">
         <div class="option bookInfo-detail" onclick="setOption('readBooks', 'bookInfo', 'detail')">显示书详情</div>
         <div class="option bookInfo-onlyBigImage" onclick="setOption('readBooks', 'bookInfo', 'onlyBigImage')">仅大图</div>
-        <div class="option bookInfo-onlySmallImage" onclick="setOption('readBooks', 'bookInfo', 'onlySmallImage')">仅小图</div>
+        <div class="option bookInfo-onlySmallImage" onclick="setOption('readBooks', 'bookInfo', 'onlySmallImage')">仅小图
+        </div>
     </div>
     <!-- 在读 -->
-    <div class="bookCollection media-all pagesRange-all" id="readingBooks">
-        <h1>在读 <span class="count" id="readingCount"></span></h1>
-        <div id="readingBookList"></div>
+    <div class="bookCollectionWrapper">
+        <div class="bookCollection media-all pagesRange-all" id="readingBooks">
+            <h1>在读 <span class="count" id="readingCount"></span></h1>
+            <div id="readingBookList"></div>
+        </div>
     </div>
 
     <!-- 读过 -->
-    <div class="bookCollection media-all pagesRange-all" id="readBooks">
-        <h1>读过 <span class="count" id="readCount"></span></h1>
-        <!-- <div class="options media" id="readMediaOptions">
+    <div class="bookCollectionWrapper">
+        <div class="bookCollection media-all pagesRange-all" id="readBooks">
+            <h1>读过 <span class="count" id="readCount"></span></h1>
+            <!-- <div class="options media" id="readMediaOptions">
             <div class="option meida-all" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">all</div>
             <div class="option meida-纸质书" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">纸质书</div>
             <div class="option meida-电子书" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">电子书</div>
@@ -65,19 +69,23 @@
             <div class="option order-date" onclick="setOption('readBooks', 'order', 'date');refreshBookList('readBooks');">date</div>
             <div class="option order-rating" onclick="setOption('readBooks', 'order', 'rating');refreshBookList('readBooks');">rating</div>
         </div> -->
-        <div id="readBookList"></div>
+            <div id="readBookList"></div>
+        </div>
     </div>
 
     <!-- 已购买 -->
-    <div class="bookCollection media-all pagesRange-all" id="boughtBooks">
-        <h1>已购买 <span class="count" id="boughtCount"></span></h1>
-        <div id="boughtBookList"></div>
+    <div class="bookCollectionWrapper">
+        <div class="bookCollection media-all pagesRange-all" id="boughtBooks">
+            <h1>已购买 <span class="count" id="boughtCount"></span></h1>
+            <div id="boughtBookList"></div>
+        </div>
     </div>
-
     <!-- 计划购买 -->
-    <div class="bookCollection media-all pagesRange-all" id="purchaseBooks">
-        <h1>计划购买 <span class="count" id="purchaseCount"></span></h1>
-        <div id="purchaseBookList"></div>
+    <div class="bookCollectionWrapper">
+        <div class="bookCollection media-all pagesRange-all" id="purchaseBooks">
+            <h1>计划购买 <span class="count" id="purchaseCount"></span></h1>
+            <div id="purchaseBookList"></div>
+        </div>
     </div>
 </body>
 <script>
