@@ -1,0 +1,117 @@
+/*
+ * @Description   书籍样式
+ * @Author        Alex_McAvoy
+ * @Date          2026-03-13 14:04:20
+ */
+.book {
+  width: 200px;
+  margin: 15px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  overflow: visible;
+  float: left;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+.book:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.book .image {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.book .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid #ccc;
+}
+
+.book .detail {
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.4em;
+  color: #333;
+  background: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .book {
+    background: rgba(50, 50, 50, 0.95);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .book .detail {
+    color: #ddd;
+    background: rgba(50, 50, 50, 0.95);
+  }
+}
+
+.book .detail .name {
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.book .detail .authorNation {
+  text-align: center;
+  margin-bottom: 2px;
+}
+
+.book .detail span {
+  display: inline-block;
+  padding: 0;
+  font-size: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .book .detail span {
+    background: none;
+    color: #ccc;
+  }
+}
+
+.book .detail .authorNation,
+.book .detail .category,
+.book .detail .publisher,
+.book .detail .ISBN {
+  margin-bottom: 2px;
+}
+
+.book .comment .content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 200px;
+  background: #F8DFA4;
+  border: 1px solid #aaa;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #555;
+  z-index: 10;
+}
+
+.book .comment:hover .content {
+  display: block;
+}
+
+.book .detail .bookFooter {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  min-height: 24px;
+}

@@ -15,8 +15,8 @@
     <script src="./resources/js/bookUtils.js" charset="UTF-8"></script>
     <script src="./resources/js/button.js" charset="UTF-8"></script>
     <link rel="stylesheet" href="./resources/css/base.css">
-    <link rel="stylesheet" href="./resources/css/bookShelf.css">
-    <link rel="stylesheet" href="./resources/css/bookList.css">
+    <link rel="stylesheet" href="./resources/css/bookCollection.css">
+    <link rel="stylesheet" href="./resources/css/book.css">
     <link rel="stylesheet" href="./resources/css/option.css">
     <link rel="stylesheet" href="./resources/css/comment.css">
     <link rel="stylesheet" href="./resources/css/rating.css">
@@ -33,7 +33,7 @@
     <!-- 读过 -->
     <div class="bookCollection media-all pagesRange-all" id="readBooks">
         <h1>读过 <span class="count" id="readCount"></span></h1>
-        <div class="options media" id="readMediaOptions">
+        <!-- <div class="options media" id="readMediaOptions">
             <div class="option meida-all" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">all</div>
             <div class="option meida-纸质书" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">纸质书</div>
             <div class="option meida-电子书" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">电子书</div>
@@ -65,7 +65,7 @@
         <div class="options order" id="readOrderOptions">
             <div class="option order-date" onclick="setOption('readBooks', 'order', 'date');refreshBookList('readBooks');">date</div>
             <div class="option order-rating" onclick="setOption('readBooks', 'order', 'rating');refreshBookList('readBooks');">rating</div>
-        </div>
+        </div> -->
         <div id="readBookList"></div>
     </div>
 
@@ -111,7 +111,6 @@
                 renderBookList(BOOKS.read, {
                     showComment: true,
                     showRating: true,
-                    showReadDate: true
                 })
             );
 

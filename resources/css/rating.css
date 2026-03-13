@@ -4,15 +4,25 @@
  * @Date          2026-03-13 14:08:44
  */
 .book .rating {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  letter-spacing: 3px;
+  margin-top: 0;
+  margin-left: auto;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 2px;
+  text-align: right;
+  white-space: nowrap;
 }
 
 .book .rating .star {
   color: #F5B943;
 }
+
 .book .rating .hollowStar {
   color: #ccc;
+}
+
+@media (prefers-color-scheme: dark) {
+  .book .rating .hollowStar {
+    color: #666;
+  }
 }

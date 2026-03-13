@@ -3,36 +3,54 @@
  * @Author        Alex_McAvoy
  * @Date          2026-03-13 14:08:31
  */
+.book .comment {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  font-size: 13px;
+  line-height: 1;
+}
+
 .book .comment .icon {
-  position: absolute;
-  bottom: -15px;
-  left: 0;
+  display: inline-block;
   color: gray;
   font-weight: bold;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .book .comment .content {
   display: none;
   position: absolute;
-  top: 435px;
+  top: 22px;
+  left: 0;
+  width: 180px;
   background: #F8DFA4;
   border: 1px solid #aaa;
-  padding: 5px;
-  border-radius: 5px;
-  box-shadow: 2px 2px 3px #aaa;
-  font-size: 14px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+  font-size: 13px;
+  line-height: 1.5em;
   color: #555;
-  z-index: 10;
-}
-
-@media (prefers-color-scheme: dark) {
-  .book .comment .content {
-    border: 1px solid #777;
-    box-shadow: 2px 2px 3px #333;
-  }
+  z-index: 20;
+  word-break: break-all;
 }
 
 .book .comment:hover .content {
   display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  .book .comment .icon {
+    color: #aaa;
+  }
+
+  .book .comment .content {
+    background: #5a4a2c;
+    border: 1px solid #777;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    color: #ddd;
+  }
 }
