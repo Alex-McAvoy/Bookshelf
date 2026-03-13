@@ -1,0 +1,27 @@
+/*
+ * @Description   书架容器
+ * @Author        Alex_McAvoy
+ * @Date          2026-03-13 14:03:19
+ */
+
+.bookCollection {
+  clear: both;
+}
+
+.bookCollection h1 .count {
+  margin: 0 10px;
+  padding: 0 10px;
+  vertical-align: 3px;
+  font-size: 24px;
+  font-weight: normal;
+  border-radius: 15px;
+  background: #ddd;
+  color: #666;
+}
+
+@media (prefers-color-scheme: dark) {
+  .bookCollection h1 .count {
+    background: #666;
+    color: #bbb;
+  }
+}
