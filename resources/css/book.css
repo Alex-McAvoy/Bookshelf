@@ -110,19 +110,16 @@
 .book .comment .content {
   display: none;
   position: absolute;
-  top: 22px;
+  top: 100%;
   left: 0;
-  width: 180px;
+  width: 200px;
   background: #F8DFA4;
   border: 1px solid #aaa;
-  padding: 6px 8px;
-  border-radius: 6px;
-  box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-  font-size: 13px;
-  line-height: 1.5em;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
   color: #555;
-  z-index: 20;
-  word-break: break-all;
+  z-index: 10;
 }
 
 .book .comment:hover .content {
@@ -140,25 +137,6 @@
     box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
     color: #ddd;
   }
-}
-
-.book .comment .content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 200px;
-  background: #F8DFA4;
-  border: 1px solid #aaa;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 14px;
-  color: #555;
-  z-index: 10;
-}
-
-.book .comment:hover .content {
-  display: block;
 }
 
 .book .rating {
