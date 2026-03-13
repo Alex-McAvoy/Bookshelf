@@ -77,32 +77,14 @@ function renderPagesIndicator(className, pages, base) {
         .append($("<div>").addClass("pagesText").text(pages + "页"));
 }
 
-// 渲染评分
-function renderRating(rating) {
-    var $div = $("<div>").addClass("rating");
-    if (!rating) return $div;
-    var stars = ["", "★☆☆☆☆", "★★☆☆☆", "★★★☆☆", "★★★★☆", "★★★★★"];
-    $div.html("<span class='star'>" + stars[Number(rating)] + "</span>");
-    return $div;
-}
-
-// 渲染备注
-function renderComment(comment) {
-    if (!comment) return $();
-    return $("<div>").addClass("comment")
-        .append($("<div>").addClass("icon").text("ⓘ"))
-        .append($("<div>").addClass("content").text(comment));
-}
-
 // 渲染书架
 function renderBookList(bookList, options) {
     options = options || {};
     var mediaFilter = options.mediaFilter || null;
     var showPagesOrWords = options.showPagesOrWords || false;
-    var showPublisher = options.showPublisher || false;
-    var showISBN = options.showISBN || false;
-    var showImage = options.showImage || false;
-    var showMedia = options.showMedia || false;
+    var showComment = options.showComment || false;
+    var showRating = options.showRating || false;
+    var showReadDate = options.showReadDate || false;
     var order = options.order || null;
 
     // 排序
@@ -113,26 +95,23 @@ function renderBookList(bookList, options) {
     }
 
     var $list = $("<div>").addClass("bookList");
-
     $.each(bookList, function(_, book) {
         // 媒介过滤
-        if (mediaFilter && book.media !== mediaFilter) return;
+        if (mediaFilter && book.media !== mediaFilter) 
+            return;
 
-        var $book = $("<div>").addClass("book");
-
-        // 封面
-        if (showImage) {
-            var imgURL = book.imageURL && book.imageURL.trim() !== "" ? book.imageURL : "./resources/images/samplebook.png";
-            $book.append(
-                $("<div>").addClass("image").append($("<img>").attr("src", imgURL))
-            );
-        }
-
+        // 书籍信息
+        var $book = $("<div>").addClass("book");        
+        var imgURL = book.imageURL && book.imageURL.trim() !== "" ? book.imageURL : "./resources/images/samplebook.png";
+        $book.append($("<div>").addClass("image").append($("<img>").attr("src", imgURL)));
         var $detail = $("<div>").addClass("detail");
         $detail.append($("<div>").addClass("name").text(book.name));
         $detail.append($("<div>").addClass("author").text(book.author));
         $detail.append($("<div>").addClass("nation").text(book.nation));
         $detail.append($("<div>").addClass("category").text(book.category));
+        $detail.append($("<div>").addClass("publisher").text(book.publisher));
+        $detail.append($("<div>").addClass("ISBN").text(book.ISBN));
+        $detail.append($("<div>").addClass("media").text(book.media));
 
         // 页数或字数
         if (showPagesOrWords) {
@@ -141,13 +120,27 @@ function renderBookList(bookList, options) {
             else if (book.media === "电子书" && book.wordCount)
                 $detail.append($("<div>").addClass("words").text(book.wordCount + "字"));
         }
+        
+        // 备注
+        if (showComment && book.comment) {
+            $detail.append($("<div>").addClass("comment")
+                   .append($("<div>").addClass("icon").text("ⓘ"))
+                   .append($("<div>").addClass("content").text(book.comment)));
+        }
 
-        if (showPublisher && book.publisher)
-            $detail.append($("<div>").addClass("publisher").text(book.publisher));
-        if (showISBN && book.ISBN)
-            $detail.append($("<div>").addClass("ISBN").text(book.ISBN));
-        if (showMedia && book.media)
-            $detail.append($("<div>").addClass("media").text(book.media));
+        // 评分
+        if (showRating && book.rating) {
+            var stars = ["", "★", "★★", "★★★", "★★★★", "★★★★★"];
+            var hollowStars = ["", "☆☆☆☆", "☆☆☆", "☆☆", "☆", ""]
+            $detail.append($("<div>").addClass("rating")
+                   .append($("<span>").addClass("star").text(stars[Number(book.rating)]))
+                   .append($("<span>").addClass("hollowStar").text(hollowStars[Number(book.rating)])));
+        }
+
+        // 阅读日期
+        if (showReadDate && book.readDate) {
+            $detail.append($("<div>").addClass("readDate").text(book.readDate));
+        }
 
         $book.append($detail);
         $list.append($book);
