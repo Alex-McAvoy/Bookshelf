@@ -6,21 +6,21 @@
 
 
 .bookCollectionWrapper {
-    background: url("../images/common/list_bg.png") no-repeat center top;
-    background-size: cover;
-    border-radius: 12px;
-    border: 2px solid #000;
-    padding: 20px;
-    margin: 20px 0;
-    position: relative;
-    box-shadow: 4px -4px 12px rgba(0, 0, 0, 0.4);
-    overflow: visible;
+  background: url("../images/common/list_bg.png") no-repeat center top;
+  background-size: cover;
+  border-radius: 12px;
+  border: 2px solid #000;
+  padding: 20px;
+  margin: 20px 0;
+  position: relative;
+  box-shadow: 4px -4px 12px rgba(0, 0, 0, 0.4);
+  overflow: visible;
 }
 
 .bookCollectionWrapper::after {
-    content: "";
-    display: block;
-    clear: both;
+  content: "";
+  display: block;
+  clear: both;
 }
 
 .bookCollection {
@@ -29,19 +29,20 @@
 
 .bookCollection h1 {
   text-align: center;
-    position: relative;
-    padding-bottom: 12px;
-    margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  color: #ffffff;
 }
 
 .bookCollection h1::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 8px;
-    background: url("../images/common/divide.png") no-repeat center;
-    background-size: 90% 90%;
-    margin-top: 20px;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 8px;
+  background: url("../images/common/divide.png") no-repeat center;
+  background-size: 90% 90%;
+  margin-top: 20px;
 }
 
 .bookCollection h1 .count {
