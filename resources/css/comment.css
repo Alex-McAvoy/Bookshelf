@@ -1,0 +1,38 @@
+/*
+ * @Description   评论
+ * @Author        Alex_McAvoy
+ * @Date          2026-03-13 14:08:31
+ */
+.book .comment .icon {
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  color: gray;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.book .comment .content {
+  display: none;
+  position: absolute;
+  top: 435px;
+  background: #F8DFA4;
+  border: 1px solid #aaa;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px #aaa;
+  font-size: 14px;
+  color: #555;
+  z-index: 10;
+}
+
+@media (prefers-color-scheme: dark) {
+  .book .comment .content {
+    border: 1px solid #777;
+    box-shadow: 2px 2px 3px #333;
+  }
+}
+
+.book .comment:hover .content {
+  display: block;
+}
