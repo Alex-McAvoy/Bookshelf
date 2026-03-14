@@ -87,6 +87,7 @@
   margin-bottom: 2px;
 }
 
+.bookInfo-detail .bookList .book .detail > div.media,
 .bookInfo-detail .bookList .book .detail > div.category,
 .bookInfo-detail .bookList .book .detail > div.publisher,
 .bookInfo-detail .bookList .book .detail > div.ISBN {
@@ -95,12 +96,19 @@
   align-items: flex-start;
 }
 
-.bookInfo-detail .bookList .book .detail > div span:first-child {
+.bookInfo-detail .bookList .book .detail > div.media span:first-child,
+.bookInfo-detail .bookList .book .detail > div.category span:first-child,
+.bookInfo-detail .bookList .book .detail > div.publisher span:first-child,
+.bookInfo-detail .bookList .book .detail > div.ISBN span:first-child,
+.bookInfo-detail .bookList .book .detail .bookFooter > div.rating span:first-child {
   flex: 0 0 60px;
   font-weight: bold;
 }
 
-.bookInfo-detail .bookList .book .detail > div span:last-child {
+.bookInfo-detail .bookList .book .detail > div.media span:last-child,
+.bookInfo-detail .bookList .book .detail > div.category span:last-child,
+.bookInfo-detail .bookList .book .detail > div.publisher span:last-child,
+.bookInfo-detail .bookList .book .detail > div.ISBN span:last-child {
   flex: 1;
   text-align: left;
   word-break: break-word;
@@ -110,9 +118,16 @@
   position: relative;
   display: flex;
   align-items: center;
+  gap: 2px;
   margin-top: 0;
   font-size: 13px;
   line-height: 1;
+  flex: 0 0 auto;
+}
+
+.bookInfo-detail .bookList .book .comment > span:first-child {
+  font-weight: bold;
+  flex: none;
 }
 
 .bookInfo-detail .bookList .book .comment .icon {
@@ -121,6 +136,7 @@
   font-weight: bold;
   cursor: pointer;
   font-size: 14px;
+  flex: none;
 }
 
 .bookInfo-detail .bookList .book .comment .content {
@@ -227,7 +243,7 @@
   position: absolute;
   top: 100%;
   left: 0;
-  width: 240px;             /* 弹窗宽度，可根据需要调整 */
+  width: 240px;
   display: none;
   background: #F8DFA4;
   border: 1px solid #aaa;
@@ -241,27 +257,23 @@
   word-break: break-word;
 }
 
-/* 每一行使用 flex 排列 */
 .book .info > div {
   display: flex;
   margin-bottom: 6px;
-  align-items: flex-start;   /* 垂直顶对齐 */
+  align-items: flex-start; 
 }
 
-/* 标签列（带冒号） */
 .book .info > div span:first-child {
-  flex: 0 0 60px;           /* 标签固定宽度，冒号自然对齐 */
+  flex: 0 0 60px;
   font-weight: bold;
 }
 
-/* 内容列 */
 .book .info > div span:last-child {
-  flex: 1;                   /* 占据剩余空间 */
+  flex: 1;
   text-align: left;
-  word-break: break-word;     /* 内容过长换行 */
+  word-break: break-word;
 }
 
-/* hover 显示 */
 .bookInfo-bigImage .bookList .book:hover .info:not(.hidden),
 .bookInfo-smallImage .bookList .book:hover .info:not(.hidden) {
   display: block;

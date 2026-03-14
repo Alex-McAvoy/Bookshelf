@@ -81,7 +81,7 @@ function renderBookList(bookList, options) {
         // 页数过滤
         if (pageFilter) {
             const pages = Number(book.pages);
-            if (pageFilter === "page-lt200" && (pages >= 200 || pages == 0 ))
+            if (pageFilter === "page-lt200" && (pages >= 200 || pages == 0))
                 return;
             if (pageFilter === "page-200to500" && (pages < 200 || pages > 500))
                 return;
@@ -93,7 +93,7 @@ function renderBookList(bookList, options) {
         // 字数过滤
         if (wordFilter) {
             const words = Number(book.words);
-            if (wordFilter === "word-lt100" && (words >= 100 || words == 0 ))
+            if (wordFilter === "word-lt100" && (words >= 100 || words == 0))
                 return;
             if (wordFilter === "word-100to300" && (words < 100 || words >= 300))
                 return;
@@ -126,6 +126,11 @@ function renderBookList(bookList, options) {
                 .append($("<span>").text(book.nation + book.author))
         );
         $detail.append(
+            $("<div>").addClass("media")
+                .append($("<span>").text("媒介："))
+                .append($("<span>").text(book.media ? book.media : "暂无"))
+        );
+        $detail.append(
             $("<div>").addClass("category")
                 .append($("<span>").text("类别："))
                 .append($("<span>").text(book.category ? book.category : "暂无"))
@@ -135,16 +140,26 @@ function renderBookList(bookList, options) {
                 .append($("<span>").text("出版社："))
                 .append($("<span>").text(book.publisher ? book.publisher : "暂无"))
         );
-        $detail.append(
-            $("<div>").addClass("ISBN")
-                .append($("<span>").text("ISBN："))
-                .append($("<span>").text(book.ISBN ? book.ISBN : "暂无"))
-        );
+        if (book.media == "纸质书") {
+            $detail.append(
+                $("<div>").addClass("ISBN")
+                    .append($("<span>").text("ISBN："))
+                    .append($("<span>").text(book.ISBN ? book.ISBN : "暂无"))
+            );
+        } else {
+            $detail.append(
+                $("<div>").addClass("ISBN")
+                    .append($("<span>").text(""))
+                    .append($("<span>").text(""))
+            );
+        }
+
         if (showComment && book.comment) {
             $bookFooter.append(
                 $("<div>").addClass("comment")
-                    .append($("<div>").addClass("icon").text("ⓘ"))
-                    .append($("<div>").addClass("content").text(book.comment))
+                    .append($("<span>").text("备注："))
+                    .append($("<span>").addClass("icon").text("ⓘ"))
+                    .append($("<span>").addClass("content").text(book.comment))
             );
         }
         if (showRating && book.rating) {
@@ -152,11 +167,12 @@ function renderBookList(bookList, options) {
             var hollowStars = ["", "☆☆☆☆", "☆☆☆", "☆☆", "☆", ""];
             $bookFooter.append(
                 $("<div>").addClass("rating")
+                    .append($("<span>").text("评分："))
                     .append($("<span>").addClass("star").text(stars[Number(book.rating)]))
                     .append($("<span>").addClass("hollowStar").text(hollowStars[Number(book.rating)]))
             );
         }
-        if ($bookFooter.children().length > 0) {
+        if (showComment || showRating) {
             $detail.append($bookFooter);
         }
 
@@ -172,6 +188,11 @@ function renderBookList(bookList, options) {
                 .append($("<span>").text(book.nation + book.author))
         );
         $info.append(
+            $("<div>").addClass("media")
+                .append($("<span>").text("媒介："))
+                .append($("<span>").text(book.media ? book.media : "暂无"))
+        );
+        $info.append(
             $("<div>").addClass("category")
                 .append($("<span>").text("类别："))
                 .append($("<span>").text(book.category ? book.category : "暂无"))
@@ -181,11 +202,19 @@ function renderBookList(bookList, options) {
                 .append($("<span>").text("出版社："))
                 .append($("<span>").text(book.publisher ? book.publisher : "暂无"))
         );
-        $info.append(
-            $("<div>").addClass("ISBN")
-                .append($("<span>").text("ISBN："))
-                .append($("<span>").text(book.ISBN ? book.ISBN : "暂无"))
-        );
+        if (book.media == "纸质书") {
+            $info.append(
+                $("<div>").addClass("ISBN")
+                    .append($("<span>").text("ISBN："))
+                    .append($("<span>").text(book.ISBN ? book.ISBN : "暂无"))
+            );
+        } else {
+            $info.append(
+                $("<div>").addClass("ISBN")
+                    .append($("<span>").text(""))
+                    .append($("<span>").text(""))
+            );
+        }
         if (showRating && book.rating) {
             var stars = ["", "★", "★★", "★★★", "★★★★", "★★★★★"];
             var hollowStars = ["", "☆☆☆☆", "☆☆☆", "☆☆", "☆", ""];
