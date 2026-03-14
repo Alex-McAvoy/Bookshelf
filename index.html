@@ -14,6 +14,7 @@
     <script src="./resources/js/markdown.js" charset="UTF-8"></script>
     <script src="./resources/js/bookUtils.js" charset="UTF-8"></script>
     <script src="./resources/js/button.js" charset="UTF-8"></script>
+    <script src="./resources/js/count.js" charset="UTF-8"></script>
     <link rel="stylesheet" href="./resources/css/base.css">
     <link rel="stylesheet" href="./resources/css/bookCollection.css">
     <link rel="stylesheet" href="./resources/css/book.css">
@@ -45,13 +46,42 @@
                     <span>all</span>
                     <span class="count" id="allBookCount"></span>
                 </div>
-                <div class="option" id="media-pBook" onclick="setOptionActive(this); refreshBookList('纸质书');">
+                <div class="option" id="media-pBook"
+                    onclick="setOptionActive(this); refreshBookList({mediaFilter: '纸质书'});">
                     <span>纸质书</span>
                     <span class="count" id="pBookCount"></span>
                 </div>
-                <div class="option" id="media-eBook" onclick="setOptionActive(this); refreshBookList('电子书');">
+                <div class="option" id="media-eBook"
+                    onclick="setOptionActive(this); refreshBookList({mediaFilter: '电子书'});">
                     <span>电子书</span>
                     <span class="count" id="eBookCount"></span>
+                </div>
+            </div>
+            <div class="options subOptions" id="readPageOptions" style="display: none;">
+                <div class="option active" id="page-all"
+                    onclick="setOptionActive(this); refreshBookList({mediaFilter: '纸质书'});">
+                    <span>all</span>
+                    <span class="count" id="pageAllCount"></span>
+                </div>
+                <div class="option" id="page-lt200"
+                    onclick="setOptionActive(this); refreshBookList({mediaFilter: '纸质书', pageFilter: 'page-lt200'});">
+                    <span>200页以下</span>
+                    <span class="count" id="pageLt200Count"></span>
+                </div>
+                <div class="option" id="page-200to500"
+                    onclick="setOptionActive(this); refreshBookList({mediaFilter: '纸质书', pageFilter: 'page-200to500'});">
+                    <span>200页到500页</span>
+                    <span class="count" id="page200to500Count"></span>
+                </div>
+                <div class="option" id="page-gt500"
+                    onclick="setOptionActive(this); refreshBookList({mediaFilter: '纸质书', pageFilter: 'page-gt500'});">
+                    <span>500页以上</span>
+                    <span class="count" id="pageGt500Count"></span>
+                </div>
+                <div class="option" id="page-unknown"
+                    onclick="setOptionActive(this); refreshBookList({mediaFilter: '纸质书', pageFilter: 'page-unknown'});">
+                    <span>未知</span>
+                    <span class="count" id="pageUnknownCount"></span>
                 </div>
             </div>
             <div id="readBookList" class="bookInfo-detail"></div>
@@ -127,25 +157,17 @@
             );
 
             // 媒介过滤按钮
-            $("#allBookCount").text(BOOKS.read.length);
-            $("#pBookCount").html(getBookCount(BOOKS.read, "media", "纸质书"));
-            $("#eBookCount").html(getBookCount(BOOKS.read, "media", "电子书"));
-            var $mediaOptions = $("#readMediaOptions .option");
-            var $pageOptions = $("#readPagesOptions");
-            var $wordsOptions = $("#readWordsOptions");
-            $mediaOptions.on("click", function () {
-                var media = $(this).first().text();
-                if (media === "all") {
-                    $pageOptions.hide();
-                    $wordsOptions.hide();
-                } else if (media === "纸质书") {
-                    $pageOptions.show();
-                    $wordsOptions.hide();
-                } else if (media === "电子书") {
-                    $pageOptions.hide();
-                    $wordsOptions.show();
-                }
-            });
+            var bookList = BOOKS.read
+            $("#allBookCount").text(bookList.length);
+            $("#pBookCount").html(getBookCount(bookList, "media", "纸质书"));
+            $("#eBookCount").html(getBookCount(bookList, "media", "电子书"));
+            $("#pageAllCount").text(getPageCount(bookList, "all"));
+            $("#pageLt200Count").text(getPageCount(bookList, "page-lt200"));
+            $("#page200to500Count").text(getPageCount(bookList, "page-200to500"));
+            $("#pageGt500Count").text(getPageCount(bookList, "page-gt500"));
+            $("#pageUnknownCount").text(getPageCount(bookList, "page-unknown"));
+
+
         });
     });
 </script>

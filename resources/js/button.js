@@ -24,7 +24,7 @@ function setBookInfoOption(optionValue) {
     });
 }
 
-// 设置过滤按钮的active
+// 重置媒介过滤器
 function setOptionActive(element) {
     var $currentOption = $(element);
     var $optionsContainer = $currentOption.closest(".options");
@@ -32,12 +32,31 @@ function setOptionActive(element) {
     $currentOption.addClass("active");
 }
 
-// 获取过滤后的书籍
-function refreshBookList(mediaFilter) {
-    $("#readBookList .book").remove();
+// 重置页数过滤器
+function resetPageFilter() {
+    $("#readPageOptions .option").removeClass("active");
+    $("#page-all").addClass("active");
+}
 
+// 刷新读过的书籍列表
+function refreshBookList(options) {
+    options = options || {};
+    var mediaFilter = options.mediaFilter;
+    var pageFilter = options.pageFilter;
+
+    if (mediaFilter === "纸质书") {
+        $("#readPageOptions").show();
+        pageFilter = pageFilter || "page-all";
+    } else {
+        $("#readPageOptions").hide();
+        resetPageFilter();
+        pageFilter = null;
+    }
+
+    $("#readBookList").empty();
     $("#readBookList").append(renderBookList(window.BOOK_COLLECTIONS.readingHistory, {
         mediaFilter: mediaFilter,
+        pageFilter: pageFilter,
         showComment: true,
         showRating: true
     }));

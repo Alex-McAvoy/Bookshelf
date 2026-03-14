@@ -60,3 +60,8 @@
   background: rgba(255, 255, 255, 0.18);
   color: #fff;
 }
+
+.subOptions {
+  margin-top: 8px;
+  background: rgba(245, 245, 245, 0.85);
+}

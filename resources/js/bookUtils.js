@@ -59,6 +59,7 @@ function getYear(date) {
 function renderBookList(bookList, options) {
     options = options || {};
     var mediaFilter = options.mediaFilter || null;
+    var pageFilter = options.pageFilter || null;
     var showComment = options.showComment || false;
     var showRating = options.showRating || false;
     var order = options.order || null;
@@ -75,6 +76,19 @@ function renderBookList(bookList, options) {
         // 媒介过滤
         if (mediaFilter && book.media !== mediaFilter)
             return;
+
+        // 页数过滤
+        if (pageFilter) {
+            const pages = Number(book.pages);
+            if (pageFilter === "page-unknown" && pages != 0)
+                return;
+            if (pageFilter === "page-lt200" && (pages >= 200 || pages == 0 ))
+                return;
+            if (pageFilter === "page-200to500" && (pages < 200 || pages > 500))
+                return;
+            if (pageFilter === "page-gt500" && pages <= 500)
+                return;
+        }
 
         // 结点
         var $book = $("<div>").addClass("book");
@@ -182,15 +196,4 @@ function renderBookList(bookList, options) {
     });
 
     return $list;
-}
-
-// 渲染书籍数量
-function getBookCount(bookList, key, value) {
-    let count = 0;
-    for (let book of bookList) {
-        if (book[key] == value) {
-            count++;
-        }
-    }
-    return count;
 }
