@@ -37,19 +37,33 @@ function resetPageFilter() {
     $("#readPageOptions .option").removeClass("active");
     $("#page-all").addClass("active");
 }
+// 重置字数过滤器
+function resetWordFilter() {
+    $("#readPageOptions .option").removeClass("active");
+    $("#word-all").addClass("active");
+}
 
 // 刷新读过的书籍列表
 function refreshBookList(options) {
     options = options || {};
     var mediaFilter = options.mediaFilter;
     var pageFilter = options.pageFilter;
+    var wordFilter = options.wordFilter;
 
     if (mediaFilter === "纸质书") {
         $("#readPageOptions").show();
+        $("#readWordOptions").hide();
         pageFilter = pageFilter || "page-all";
-    } else {
+    } else if (mediaFilter === "电子书") {
         $("#readPageOptions").hide();
+        $("#readWordOptions").show();
+        wordFilter = wordFilter || "word-all";
+    }
+    else {
+        $("#readPageOptions").hide();
+        $("#readWordOptions").hide();
         resetPageFilter();
+        resetWordFilter();
         pageFilter = null;
     }
 
@@ -57,6 +71,7 @@ function refreshBookList(options) {
     $("#readBookList").append(renderBookList(window.BOOK_COLLECTIONS.readingHistory, {
         mediaFilter: mediaFilter,
         pageFilter: pageFilter,
+        wordFilter: wordFilter,
         showComment: true,
         showRating: true
     }));

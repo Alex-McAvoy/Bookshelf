@@ -46,3 +46,40 @@ function getPageCount(bookList, pageFilter) {
     }
     return count;
 }
+
+// 字数书籍数量统计
+function getWordCount(bookList, wordFilter) {
+    let count = 0;
+    for (let book of bookList) {
+        if (book.media == "纸质书")
+            continue;
+
+        const words = Number(book.words);
+        switch (wordFilter) {
+            case "all":
+                count++;
+                break;
+            case "word-lt100":
+                if (words != 0 && words < 100)
+                    count++;
+                break;
+            case "word-100to300":
+                if (words >= 100 && words < 300)
+                    count++;
+                break;
+            case "word-300to500":
+                if (words >= 300 && words < 500)
+                    count++;
+                break;
+            case "word-gt500":
+                if (words > 500)
+                    count++;
+                break;
+            case "word-unknown":
+                if (words == 0)
+                    count++;
+                break;
+        }
+    }
+    return count;
+}

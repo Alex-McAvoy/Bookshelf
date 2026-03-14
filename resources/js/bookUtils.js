@@ -60,6 +60,7 @@ function renderBookList(bookList, options) {
     options = options || {};
     var mediaFilter = options.mediaFilter || null;
     var pageFilter = options.pageFilter || null;
+    var wordFilter = options.wordFilter || null;
     var showComment = options.showComment || false;
     var showRating = options.showRating || false;
     var order = options.order || null;
@@ -80,13 +81,27 @@ function renderBookList(bookList, options) {
         // 页数过滤
         if (pageFilter) {
             const pages = Number(book.pages);
-            if (pageFilter === "page-unknown" && pages != 0)
-                return;
             if (pageFilter === "page-lt200" && (pages >= 200 || pages == 0 ))
                 return;
             if (pageFilter === "page-200to500" && (pages < 200 || pages > 500))
                 return;
             if (pageFilter === "page-gt500" && pages <= 500)
+                return;
+            if (pageFilter === "page-unknown" && pages != 0)
+                return;
+        }
+        // 字数过滤
+        if (wordFilter) {
+            const words = Number(book.words);
+            if (wordFilter === "word-lt100" && (words >= 100 || words == 0 ))
+                return;
+            if (wordFilter === "word-100to300" && (words < 100 || words >= 300))
+                return;
+            if (wordFilter === "word-300to500" && (words < 300 || words > 500))
+                return;
+            if (wordFilter === "word-gt500" && words <= 500)
+                return;
+            if (wordFilter === "word-unknown" && words != 0)
                 return;
         }
 
