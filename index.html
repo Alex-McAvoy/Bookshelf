@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="./resources/css/bookCollection.css">
     <link rel="stylesheet" href="./resources/css/book.css">
     <link rel="stylesheet" href="./resources/css/option.css">
-    <link rel="stylesheet" href="./resources/css/active.css">
     <link rel="stylesheet" href="./resources/css/bookSwitch.css">
 </head>
 
@@ -31,7 +30,7 @@
     </div>
     <!-- 在读 -->
     <div class="bookCollectionWrapper">
-        <div class="bookCollection media-all pagesRange-all" id="readingBooks">
+        <div class="bookCollection" id="readingBooks">
             <h1>在读 <span class="count" id="readingCount"></span></h1>
             <div id="readingBookList" class="bookInfo-detail"></div>
         </div>
@@ -39,51 +38,36 @@
 
     <!-- 读过 -->
     <div class="bookCollectionWrapper">
-        <div class="bookCollection media-all pagesRange-all" id="readBooks">
+        <div class="bookCollection" id="readBooks">
             <h1>读过 <span class="count" id="readCount"></span></h1>
-            <!-- <div class="options media" id="readMediaOptions">
-            <div class="option meida-all" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">all</div>
-            <div class="option meida-纸质书" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">纸质书</div>
-            <div class="option meida-电子书" onclick="setOption('readBooks', 'media');refreshBookList('readBooks')">电子书</div>
-        </div>
-        <div class="options pagesRange" id="readPagesOptions" style="display:none;">
-            <div class="option pagesRange-all" onclick="setOption('readBooks', 'pagesRange', 'all');refreshBookList('readBooks');">all</div>
-            <div class="option pagesRange-200页以下" onclick="setOption('readBooks', 'pagesRange', '200页以下');refreshBookList('readBooks');">200页以下</div>
-            <div class="option pagesRange-200到500页" onclick="setOption('readBooks', 'pagesRange', '200到500页');refreshBookList('readBooks');">200页以下</div>
-            <div class="option pagesRange-500到1000页" onclick="setOption('readBooks', 'pagesRange', '500到1000页');refreshBookList('readBooks');">200页以下</div>
-            <div class="option pagesRange-1000页以上" onclick="setOption('readBooks', 'pagesRange', '1000页以上');refreshBookList('readBooks');">200页以下</div>
-        </div>
-        <div class="options wordsRange" id="readWordsOptions" style="display:none;">
-            <div class="option wordsRange-all">all</div>
-            <div class="option wordsRange-50万字以下">50万字以下</div>
-            <div class="option wordsRange-50万到100万字">50万到100万字</div>
-            <div class="option wordsRange-100万到200万字">100万到200万字</div>
-            <div class="option wordsRange-200万字以上">200万字以上</div>
-        </div>
-        <div class="options group">
-            <div class="option group-none" onclick="setOption('readBooks', 'group', 'none')">不分组</div>
-            <div class="option group-year" onclick="setOption('readBooks', 'group', 'year')">年</div>
-            <div class="option group-month" onclick="setOption('readBooks', 'group', 'month')">月</div>
-        </div>
-        
-        <div class="options order" id="readOrderOptions">
-            <div class="option order-date" onclick="setOption('readBooks', 'order', 'date');refreshBookList('readBooks');">date</div>
-            <div class="option order-rating" onclick="setOption('readBooks', 'order', 'rating');refreshBookList('readBooks');">rating</div>
-        </div> -->
+            <div class="options" id="readMediaOptions">
+                <div class="option active" id="media-all" onclick="setOptionActive(this); refreshBookList();">
+                    <span>all</span>
+                    <span class="count" id="allBookCount"></span>
+                </div>
+                <div class="option" id="media-pBook" onclick="setOptionActive(this); refreshBookList('纸质书');">
+                    <span>纸质书</span>
+                    <span class="count" id="pBookCount"></span>
+                </div>
+                <div class="option" id="media-eBook" onclick="setOptionActive(this); refreshBookList('电子书');">
+                    <span>电子书</span>
+                    <span class="count" id="eBookCount"></span>
+                </div>
+            </div>
             <div id="readBookList" class="bookInfo-detail"></div>
         </div>
     </div>
 
     <!-- 已购买 -->
     <div class="bookCollectionWrapper">
-        <div class="bookCollection media-all pagesRange-all" id="boughtBooks">
+        <div class="bookCollection" id="boughtBooks">
             <h1>已购买 <span class="count" id="boughtCount"></span></h1>
             <div id="boughtBookList" class="bookInfo-detail"></div>
         </div>
     </div>
     <!-- 计划购买 -->
     <div class="bookCollectionWrapper">
-        <div class="bookCollection media-all pagesRange-all" id="purchaseBooks">
+        <div class="bookCollection" id="purchaseBooks">
             <h1>计划购买 <span class="count" id="purchaseCount"></span></h1>
             <div id="purchaseBookList" class="bookInfo-detail"></div>
         </div>
@@ -142,12 +126,15 @@
                 })
             );
 
-            // 点击媒介按钮
+            // 媒介过滤按钮
+            $("#allBookCount").text(BOOKS.read.length);
+            $("#pBookCount").html(getBookCount(BOOKS.read, "media", "纸质书"));
+            $("#eBookCount").html(getBookCount(BOOKS.read, "media", "电子书"));
             var $mediaOptions = $("#readMediaOptions .option");
             var $pageOptions = $("#readPagesOptions");
             var $wordsOptions = $("#readWordsOptions");
             $mediaOptions.on("click", function () {
-                var media = $(this).text();
+                var media = $(this).first().text();
                 if (media === "all") {
                     $pageOptions.hide();
                     $wordsOptions.hide();

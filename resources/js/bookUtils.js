@@ -55,28 +55,6 @@ function getYear(date) {
     return parts.length >= 1 ? parts[0] + "年" : "";
 }
 
-// 获取页数范围
-function getPagesRange(pageCount) {
-    if (!pageCount)
-        return "未知";
-    else if (pageCount < 200)
-        return "200页以下";
-    else if (pageCount < 500 && pageCount >= 200)
-        return "200到500页";
-    else if (pageCount < 1000 && pageCount >= 500)
-        return "500到1000页";
-    else if (pageCount >= 1000)
-        return "1000页以上";
-}
-
-// 渲染页数指示条
-function renderPagesIndicator(className, pages, base) {
-    var percent = Math.min(((pages - base) / 1000) * 100, 100);
-    return $("<div>").addClass("pagesIndicator " + className)
-        .css("width", percent + "%")
-        .append($("<div>").addClass("pagesText").text(pages + "页"));
-}
-
 // 渲染书架
 function renderBookList(bookList, options) {
     options = options || {};
@@ -204,4 +182,15 @@ function renderBookList(bookList, options) {
     });
 
     return $list;
+}
+
+// 渲染书籍数量
+function getBookCount(bookList, key, value) {
+    let count = 0;
+    for (let book of bookList) {
+        if (book[key] == value) {
+            count++;
+        }
+    }
+    return count;
 }

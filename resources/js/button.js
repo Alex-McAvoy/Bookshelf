@@ -14,7 +14,7 @@ function setBookInfoOption(optionValue) {
         });
         $el.addClass("bookInfo-" + optionValue);
 
-        if(optionValue === "detail") {
+        if (optionValue === "detail") {
             $el.find(".detail").removeClass("hidden");
             $el.find(".info").addClass("hidden");
         } else {
@@ -24,6 +24,39 @@ function setBookInfoOption(optionValue) {
     });
 }
 
+// 设置过滤按钮的active
+function setOptionActive(element) {
+    var $currentOption = $(element);
+    var $optionsContainer = $currentOption.closest(".options");
+    $optionsContainer.find(".option").removeClass("active");
+    $currentOption.addClass("active");
+}
+
+// 获取过滤后的书籍
+function refreshBookList(mediaFilter) {
+    $("#readBookList .book").remove();
+
+    $("#readBookList").append(renderBookList(window.BOOK_COLLECTIONS.readingHistory, {
+        mediaFilter: mediaFilter,
+        showComment: true,
+        showRating: true
+    }));
+}
+
+
+
+
+
+// 为某个元素移除已有的class并设置新的class
+function setOption(elementId, optionName, optionValue) {
+    var $el = $("#" + elementId);
+    // 移除已有的 optionName-* class
+    $el.removeClass(function (index, className) {
+        return (className.match(new RegExp(optionName + "-\\S+", "g")) || []).join(' ');
+    });
+    // 添加新的 class
+    $el.addClass(optionName + "-" + optionValue);
+}
 
 
 // 获取媒介数量
@@ -44,7 +77,8 @@ function renderMediaOptionButton(media, bookList, bookListId) {
     if (mediaCount === 0 && media !== "all") return "";
 
     var btnHtml = "<span class='text'>" + media + "</span>";
-    if (media !== "all") btnHtml += "<span class='count'>" + mediaCount + "</span>";
+    if (media !== "all")
+        btnHtml += "<span class='count'>" + mediaCount + "</span>";
 
     return $("<div>")
         .addClass("option media-" + media)
@@ -74,16 +108,7 @@ function renderPagesRangeOptionButton(pagesRange, bookList, bookListId) {
         });
 }
 
-// 设置选项
-function setOption(elementId, optionName, optionValue) {
-    var $el = $("#" + elementId);
-    // 移除已有的 optionName-* class
-    $el.removeClass(function (index, className) {
-        return (className.match(new RegExp(optionName + "-\\S+", "g")) || []).join(' ');
-    });
-    // 添加新的 class
-    $el.addClass(optionName + "-" + optionValue);
-}
+
 
 // 获取选项值
 function getOption(elementId, optionName) {
@@ -99,25 +124,25 @@ function getOption(elementId, optionName) {
 }
 
 // 重新渲染书架
-function refreshBookList(bookListId) {
-    var $collection = $("#" + bookListId);
+// function refreshBookList(bookListId) {
+//     var $collection = $("#" + bookListId);
 
-    var media = getOption(bookListId, "media");
-    var pagesRange = getOption(bookListId, "pagesRange");
-    var order = getOption(bookListId, "order") || "ReadYearAndRating";
+//     var media = getOption(bookListId, "media");
+//     var pagesRange = getOption(bookListId, "pagesRange");
+//     var order = getOption(bookListId, "order") || "ReadYearAndRating";
 
-    // 获取书籍列表
-    var bookList = window.BOOK_COLLECTIONS[bookListId] || [];
+//     // 获取书籍列表
+//     var bookList = window.BOOK_COLLECTIONS[bookListId] || [];
 
-    var renderedHtml = renderBookList(bookList, {
-        mediaFilter: media && media !== "all" ? media : null,
-        showPagesOrWords: true,
-        showPublisher: true,
-        showISBN: true,
-        showImage: true,
-        showMedia: true,
-        order: order
-    });
+//     var renderedHtml = renderBookList(bookList, {
+//         mediaFilter: media && media !== "all" ? media : null,
+//         showPagesOrWords: true,
+//         showPublisher: true,
+//         showISBN: true,
+//         showImage: true,
+//         showMedia: true,
+//         order: order
+//     });
 
-    $collection.find("> #"+bookListId+"BookList, > div.bookList, > div:last-child").first().html(renderedHtml);
-}
+//     $collection.find("> #"+bookListId+"BookList, > div.bookList, > div:last-child").first().html(renderedHtml);
+// }
