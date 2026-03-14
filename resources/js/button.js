@@ -55,6 +55,7 @@ function refreshBookList(options) {
         resetWordFilter();
         wordFilter = null;
 
+        $("#readSubOptions").show();
         $("#readPageOptions").show();
         pageFilter = pageFilter || "page-all";
     } else if (mediaFilter === "电子书") {
@@ -62,10 +63,12 @@ function refreshBookList(options) {
         resetPageFilter();
         pageFilter = null;
 
+        $("#readSubOptions").show();
         $("#readWordOptions").show();
         wordFilter = wordFilter || "word-all";
     }
     else {
+        $("#readSubOptions").hide();
         $("#readPageOptions").hide();
         $("#readWordOptions").hide();
         resetPageFilter();
