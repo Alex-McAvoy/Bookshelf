@@ -114,6 +114,11 @@
   word-break: break-word;
 }
 
+.bookInfo-detail .bookList .book .detail .authorNation.placeholder,
+.bookInfo-detail .bookList .book .detail > div.ISBN.placeholder {
+  visibility: hidden;
+}
+
 .bookInfo-detail .bookList .book .comment {
   position: relative;
   display: flex;

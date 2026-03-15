@@ -121,10 +121,17 @@ function renderBookList(bookList, options) {
 
         // 详情模式
         $detail.append($("<div>").addClass("name").text("《" + book.name + "》"));
-        $detail.append(
-            $("<div>").addClass("authorNation")
-                .append($("<span>").text(book.nation + book.author))
-        );
+        if ((book.nation + book.author).trim() !== "") {
+            $detail.append(
+                $("<div>").addClass("authorNation")
+                    .append($("<span>").text(book.nation + book.author))
+            );
+        } else {
+            $detail.append(
+                $("<div>").addClass("authorNation placeholder")
+                    .append($("<span>").text("暂无"))
+            );
+        }
         $detail.append(
             $("<div>").addClass("media")
                 .append($("<span>").text("媒介："))
@@ -148,9 +155,9 @@ function renderBookList(bookList, options) {
             );
         } else {
             $detail.append(
-                $("<div>").addClass("ISBN")
-                    .append($("<span>").text(""))
-                    .append($("<span>").text(""))
+                $("<div>").addClass("ISBN placeholder")
+                    .append($("<span>").text("ISBN："))
+                    .append($("<span>").text("暂无"))
             );
         }
 
