@@ -268,7 +268,6 @@ function renderGroupedBookList(bookList, groupMode, options) {
     var showRating = options.showRating || false;
     var order = options.order || null;
 
-    // 排序（先整体排序，分组后每组保留顺序）
     if (order === "rating") {
         bookList = sortBookList(bookList, compareByRating);
     } else if (order === "ReadYearAndRating") {
@@ -319,18 +318,21 @@ function renderGroupedBookList(bookList, groupMode, options) {
 
     // 按年/按月分组
     $.each(filteredList, function (_, book) {
-        // 这里假设你的字段是 readDate，例如 2025-08-03
-        // 如果你的实际字段名不是 readDate，请改这里
-        var readDate = (book.readDate || "").trim();
+        var readDate = (book.date || "").trim();
         var groupKey = "未知";
 
         if (readDate !== "") {
+            const parts = readDate.split("-");
+            const year = parts[0]; // 年份
+            const month = parts[1] ? parseInt(parts[1], 10) : null; // 月份
             if (groupMode === "year") {
-                // 2025-08-03 -> 2025年
-                groupKey = readDate.substring(0, 4) + "年";
+                groupKey = year + "年";
             } else if (groupMode === "month") {
-                // 2025-08-03 -> 2025年08月
-                groupKey = readDate.substring(0, 7).replace("-", "年") + "月";
+                if (month !== null) {
+                    groupKey = year + "年" + month + "月";
+                } else {
+                    groupKey = year + "年";
+                }
             }
         }
 
