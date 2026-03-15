@@ -118,7 +118,7 @@ function renderBookList(bookList, options) {
         var basePath = "./resources/images/books/";
         var imageSrc = (book.imageURL && book.imageURL.trim() !== "")
             ? basePath + book.imageURL
-            : basePath + "samplebook.png";
+            : basePath + "default.png";
         $image.append($("<img>").attr("src", imageSrc));
 
         // 详情模式
