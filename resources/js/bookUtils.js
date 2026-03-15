@@ -63,6 +63,7 @@ function renderBookList(bookList, options) {
     var mediaFilter = options.mediaFilter || null;
     var pageFilter = options.pageFilter || null;
     var wordFilter = options.wordFilter || null;
+    var categoryFilter = options.categoryFilter || null;
     var showComment = options.showComment || false;
     var showRating = options.showRating || false;
     var order = options.order || null;
@@ -105,6 +106,16 @@ function renderBookList(bookList, options) {
                 return;
             if (wordFilter === "word-unknown" && words != 0)
                 return;
+        }
+
+        // 类别过滤
+        if (categoryFilter && categoryFilter !== "all") {
+            var bookCategory = book.category || "";
+            if ((categoryFilter === "未分类" && bookCategory !== ""))
+                return;
+            if (categoryFilter !== "未分类" && bookCategory !== categoryFilter) {
+                return;
+            }
         }
 
         // 结点

@@ -143,16 +143,17 @@ function resetCategoryGroupFilter() {
     $("#word-category-none").addClass("active");
 }
 
-// 点击左侧媒介过滤器
+// 点击媒介过滤器
 function onMediaFilterClick(element) {
     setOptionActive(element);
     resetGroupMode();
-    resetCategoryGroupFilter();
+    resetCategoryGroupMode();
+    hideCategoryDetailOptions();
 
     var mediaFilter = getMediaFilterValue();
 
     if (mediaFilter === "纸质书") {
-        resetPageFilter(); 
+        resetPageFilter();
         $("#readSubOptions").show();
         $("#readWordOptions").hide();
         $("#readPageOptions").show();
@@ -171,28 +172,13 @@ function onMediaFilterClick(element) {
     refreshBookList();
 }
 
-// 按类别显示/隐藏
-function updateCategoryGroupOptionsVisibility() {
-    var groupMode = getGroupModeValue();
-    var mediaFilter = getMediaFilterValue();
-
-    $("#pageCategoryGroupOptions").hide();
-    $("#wordCategoryGroupOptions").hide();
-
-    if (groupMode === "none") {
-        if (mediaFilter === "纸质书") {
-            $("#pageCategoryGroupOptions").show();
-        } else if (mediaFilter === "电子书") {
-            $("#wordCategoryGroupOptions").show();
-        }
-    }
-}
-
 // 点击页数过滤器
 function onPageFilterClick(element) {
     setOptionActive(element);
     resetGroupMode();
-    resetCategoryGroupFilter();
+    resetCategoryGroupMode();
+    hideCategoryDetailOptions();
+
     updateCategoryGroupOptionsVisibility();
     refreshBookList();
 }
@@ -201,7 +187,9 @@ function onPageFilterClick(element) {
 function onWordFilterClick(element) {
     setOptionActive(element);
     resetGroupMode();
-    resetCategoryGroupFilter();
+    resetCategoryGroupMode();
+    hideCategoryDetailOptions();
+
     updateCategoryGroupOptionsVisibility();
     refreshBookList();
 }
@@ -209,7 +197,9 @@ function onWordFilterClick(element) {
 // 点击分组模式过滤器
 function onGroupModeClick(element) {
     setOptionActive(element);
-    resetCategoryGroupFilter();
+    resetCategoryGroupMode();
+    hideCategoryDetailOptions();
+
     updateCategoryGroupOptionsVisibility();
     refreshBookList();
 }
@@ -217,7 +207,32 @@ function onGroupModeClick(element) {
 // 点击类别过滤器
 function onCategoryFilterClick(element) {
     setOptionActive(element);
+
+    var categoryGroupMode = getCategoryGroupModeValue();
+
+    if (categoryGroupMode === "category") {
+        renderCategoryDetailOptions();
+    } else {
+        hideCategoryDetailOptions();
+    }
+
     refreshBookList();
+}
+
+// 按类别显示/隐藏
+function updateCategoryGroupOptionsVisibility() {
+    var groupMode = getGroupModeValue();
+    var mediaFilter = getMediaFilterValue();
+
+    if ((mediaFilter === "纸质书" || mediaFilter === "电子书") && groupMode === "none") {
+        $("#pageCategoryGroupOptions").show();
+        $("#wordCategoryGroupOptions").show();
+    } else {
+        $("#pageCategoryGroupOptions").hide();
+        $("#wordCategoryGroupOptions").hide();
+
+        hideCategoryDetailOptions();
+    }
 }
 
 // 刷新读过的书籍列表
@@ -226,6 +241,7 @@ function refreshBookList() {
     var pageFilter = null;
     var wordFilter = null;
     var groupMode = getGroupModeValue();
+    var categoryFilter = getCategoryDetailValue();
 
     if (mediaFilter === "纸质书") {
         $("#readWordOptions").hide();
@@ -251,7 +267,7 @@ function refreshBookList() {
         pageFilter = null;
         wordFilter = null;
     }
-
+    
     // 不分组
     if (groupMode == "none") {
         $("#readBookList").empty();
@@ -259,6 +275,7 @@ function refreshBookList() {
             mediaFilter: mediaFilter,
             pageFilter: pageFilter,
             wordFilter: wordFilter,
+            categoryFilter: categoryFilter,
             showComment: true,
             showRating: true
         }));
@@ -288,4 +305,241 @@ function refreshBookList() {
 
     // 重新同步当前模式
     setBookInfoOption(currentBookInfoOption);
+}
+
+
+// 获取当前类别分组模式
+function getCategoryGroupModeValue() {
+    var mediaFilter = getMediaFilterValue();
+    var activeId = null;
+
+    if (mediaFilter === "纸质书") {
+        activeId = $("#pageCategoryGroupOptions .option.active").attr("id");
+    } else if (mediaFilter === "电子书") {
+        activeId = $("#wordCategoryGroupOptions .option.active").attr("id");
+    }
+
+    if (activeId && activeId.indexOf("category-group") !== -1) {
+        return "category";
+    }
+
+    return "none";
+}
+
+// 重置类别分组模式
+function resetCategoryGroupMode() {
+    $("#pageCategoryGroupOptions .option").removeClass("active");
+    $("#wordCategoryGroupOptions .option").removeClass("active");
+
+    $("#page-category-none").addClass("active");
+    $("#word-category-none").addClass("active");
+}
+
+// 隐藏第三行具体类别过滤
+function hideCategoryDetailOptions() {
+    $("#readCategoryDetailOptions").hide().empty();
+}
+
+// 判断单本书是否命中页数过滤器
+function matchPageFilter(book, pageFilter) {
+    var pages = parseInt(book.pages, 10);
+
+    // all
+    if (!pageFilter || pageFilter === "page-all") {
+        return true;
+    }
+
+    // 未知
+    if (pageFilter === "page-unknown") {
+        return isNaN(pages);
+    }
+
+    // 没有页数时，其它范围都不命中
+    if (isNaN(pages)) {
+        return false;
+    }
+
+    if (pageFilter === "page-lt200") {
+        return pages < 200;
+    }
+
+    if (pageFilter === "page-200to500") {
+        return pages >= 200 && pages <= 500;
+    }
+
+    if (pageFilter === "page-gt500") {
+        return pages > 500;
+    }
+
+    return true;
+}
+
+// 判断单本书是否命中字数过滤器
+function matchWordFilter(book, wordFilter) {
+    var words = parseFloat(book.words);
+
+    // all
+    if (!wordFilter || wordFilter === "word-all") {
+        return true;
+    }
+
+    // 未知
+    if (wordFilter === "word-unknown") {
+        return isNaN(words);
+    }
+
+    // 没有字数时，其它范围都不命中
+    if (isNaN(words)) {
+        return false;
+    }
+
+    if (wordFilter === "word-lt100") {
+        return words < 100;
+    }
+
+    if (wordFilter === "word-100to300") {
+        return words >= 100 && words < 300;
+    }
+
+    if (wordFilter === "word-300to500") {
+        return words >= 300 && words <= 500;
+    }
+
+    if (wordFilter === "word-gt500") {
+        return words > 500;
+    }
+
+    return true;
+}
+
+// 获取当前过滤条件下的类别统计结果（媒介 + 页数/字数）
+function getCategoryStatsByCurrentFilters() {
+    var mediaFilter = getMediaFilterValue();
+    var pageFilter = null;
+    var wordFilter = null;
+    var bookList = window.BOOK_COLLECTIONS.readingHistory || [];
+    var filteredBooks = [];
+    var categoryMap = {};
+
+    // 只统计纸质书 / 电子书；all 时不生成第三行
+    if (mediaFilter !== "纸质书" && mediaFilter !== "电子书") {
+        return [];
+    }
+
+    // 根据当前媒介，拿到对应的页数/字数过滤值
+    if (mediaFilter === "纸质书") {
+        pageFilter = getPageFilterValue();
+    } else if (mediaFilter === "电子书") {
+        wordFilter = getWordFilterValue();
+    }
+
+    // 先做组合过滤：媒介 + 页数/字数
+    filteredBooks = bookList.filter(function (book) {
+        // 1. 媒介过滤
+        if (book.media !== mediaFilter) {
+            return false;
+        }
+
+        // 2. 页数过滤（仅纸质书）
+        if (mediaFilter === "纸质书") {
+            return matchPageFilter(book, pageFilter);
+        }
+
+        // 3. 字数过滤（仅电子书）
+        if (mediaFilter === "电子书") {
+            return matchWordFilter(book, wordFilter);
+        }
+
+        return true;
+    });
+
+    // 统计类别
+    filteredBooks.forEach(function (book) {
+        var rawCategory = book.category ? String(book.category).trim() : "未分类";
+
+        // 当前先按单值类别统计
+        if (!categoryMap[rawCategory]) {
+            categoryMap[rawCategory] = 0;
+        }
+        categoryMap[rawCategory]++;
+    });
+
+    // 转数组
+    var result = Object.keys(categoryMap).map(function (categoryName) {
+        return {
+            name: categoryName,
+            count: categoryMap[categoryName]
+        };
+    });
+
+    // 排序：数量降序；数量相同按名称升序
+    result.sort(function (a, b) {
+        if (b.count !== a.count) {
+            return b.count - a.count;
+        }
+        return a.name.localeCompare(b.name, "zh-CN");
+    });
+
+    return result;
+}
+
+// 渲染类别过滤按钮
+function renderCategoryDetailOptions() {
+    var $container = $("#readCategoryDetailOptions");
+    // var categoryStats = getCategoryStatsByCurrentMedia();
+    var categoryStats = getCategoryStatsByCurrentFilters();
+
+    $container.empty();
+
+    // 没有类别数据，直接隐藏
+    if (!categoryStats || categoryStats.length === 0) {
+        $container.hide();
+        return;
+    }
+
+    // 加all
+    var totalCount = categoryStats.reduce(function (sum, item) {
+        return sum + item.count;
+    }, 0);
+
+    var $allOption = $("<div>")
+        .addClass("option active")
+        .attr("data-category", "all")
+        .attr("onclick", "onCategoryDetailFilterClick(this)")
+        .append($("<span>").text("all"))
+        .append($("<span>").addClass("count").text(totalCount));
+
+    $container.append($allOption);
+
+    // 加每个类别
+    categoryStats.forEach(function (item) {
+        var $option = $("<div>")
+            .addClass("option")
+            .attr("data-category", item.name)
+            .attr("onclick", "onCategoryDetailFilterClick(this)")
+            .append($("<span>").text(item.name))
+            .append($("<span>").addClass("count").text(item.count));
+
+        $container.append($option);
+    });
+
+    $container.show();
+}
+
+// 点击类别过滤按钮
+function onCategoryDetailFilterClick(element) {
+    $(element).siblings(".option").removeClass("active");
+    $(element).addClass("active");
+    refreshBookList();
+}
+
+// 获取当前具体类别值
+function getCategoryDetailValue() {
+    var $active = $("#readCategoryDetailOptions .option.active");
+
+    if ($active.length === 0) {
+        return "all";
+    }
+
+    return $active.attr("data-category") || "all";
 }
