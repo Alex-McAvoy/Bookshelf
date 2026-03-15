@@ -191,6 +191,9 @@
 }
 
 /* ---------------------- 大图模式 ---------------------- */
+.bookInfo-bigImage {
+  margin-top: 30px;
+}
 .bookInfo-bigImage .bookList .book {
   width: 200px;
   height: 280px;
@@ -217,6 +220,9 @@
 
 
 /* ---------------------- 小图模式 ---------------------- */
+.bookInfo-smallImage {
+  margin-top: 30px;
+}
 .bookInfo-smallImage .bookList .book {
   width: 60px;
   height: 85px;
