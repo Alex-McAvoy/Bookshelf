@@ -11,7 +11,7 @@ function setBookInfoOption(optionValue) {
     currentBookInfoOption = optionValue;
 
     const bookContainers = ["readingBookList", "readBookList", "boughtBookList", "purchaseBookList"];
-    
+
     bookContainers.forEach(id => {
         const $container = $("#" + id);
 
@@ -41,9 +41,20 @@ function setOptionActive(element) {
     var $currentOption = $(element);
     var $optionGroup = $currentOption.closest(".optionGroup");
 
+    // 在第一行左右、第二行右侧
     if ($optionGroup.length > 0) {
         $optionGroup.find(".option").removeClass("active");
-    } else {
+    } 
+    // 页数按钮
+    else if ($currentOption.closest("#readPageOptions").length > 0) {
+        $("#page-all, #page-lt200, #page-200to500, #page-gt500, #page-unknown").removeClass("active");
+    }
+    // 字数按钮
+    else if ($currentOption.closest("#readWordOptions").length > 0) {
+        $("#word-all, #word-lt100, #word-100to300, #word-300to500, #word-gt500, #word-unknown").removeClass("active");
+    }
+    // 其他options
+    else {
         $currentOption.closest(".options").find(".option").removeClass("active");
     }
 
@@ -107,13 +118,13 @@ function getGroupModeValue() {
 
 // 重置页数过滤器
 function resetPageFilter() {
-    $("#readPageOptions .option").removeClass("active");
+    $("#page-all, #page-lt200, #page-200to500, #page-gt500, #page-unknown").removeClass("active");
     $("#page-all").addClass("active");
 }
 
 // 重置字数过滤器
 function resetWordFilter() {
-    $("#readWordOptions .option").removeClass("active");
+    $("#word-all, #word-lt100, #word-100to300, #word-300to500, #word-gt500, #word-unknown").removeClass("active");
     $("#word-all").addClass("active");
 }
 
@@ -123,26 +134,66 @@ function resetGroupMode() {
     $("#group-none").addClass("active");
 }
 
+// 重置第类别分组过滤器
+function resetCategoryGroupFilter() {
+    $("#pageCategoryGroupOptions .option").removeClass("active");
+    $("#page-category-none").addClass("active");
+
+    $("#wordCategoryGroupOptions .option").removeClass("active");
+    $("#word-category-none").addClass("active");
+}
+
 // 点击左侧媒介过滤器
 function onMediaFilterClick(element) {
     setOptionActive(element);
     resetGroupMode();
+    resetCategoryGroupFilter();
 
     var mediaFilter = getMediaFilterValue();
 
     if (mediaFilter === "纸质书") {
-        resetPageFilter();
+        resetPageFilter(); 
+        $("#readSubOptions").show();
+        $("#readWordOptions").hide();
+        $("#readPageOptions").show();
     } else if (mediaFilter === "电子书") {
         resetWordFilter();
+        $("#readSubOptions").show();
+        $("#readPageOptions").hide();
+        $("#readWordOptions").show();
+    } else {
+        $("#readSubOptions").hide();
+        $("#readPageOptions").hide();
+        $("#readWordOptions").hide();
     }
 
+    updateCategoryGroupOptionsVisibility();
     refreshBookList();
+}
+
+// 按类别显示/隐藏
+function updateCategoryGroupOptionsVisibility() {
+    var groupMode = getGroupModeValue();
+    var mediaFilter = getMediaFilterValue();
+
+    $("#pageCategoryGroupOptions").hide();
+    $("#wordCategoryGroupOptions").hide();
+
+    if (groupMode === "none") {
+        if (mediaFilter === "纸质书") {
+            $("#pageCategoryGroupOptions").show();
+        } else if (mediaFilter === "电子书") {
+            $("#wordCategoryGroupOptions").show();
+        }
+    }
 }
 
 // 点击页数过滤器
 function onPageFilterClick(element) {
     setOptionActive(element);
     resetGroupMode();
+    resetCategoryGroupFilter();
+    updateCategoryGroupOptionsVisibility();
     refreshBookList();
 }
 
@@ -150,11 +201,21 @@ function onPageFilterClick(element) {
 function onWordFilterClick(element) {
     setOptionActive(element);
     resetGroupMode();
+    resetCategoryGroupFilter();
+    updateCategoryGroupOptionsVisibility();
     refreshBookList();
 }
 
 // 点击分组模式过滤器
 function onGroupModeClick(element) {
+    setOptionActive(element);
+    resetCategoryGroupFilter();
+    updateCategoryGroupOptionsVisibility();
+    refreshBookList();
+}
+
+// 点击类别过滤器
+function onCategoryFilterClick(element) {
     setOptionActive(element);
     refreshBookList();
 }

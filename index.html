@@ -92,6 +92,15 @@
                             <span>未知</span>
                             <span class="count" id="pageUnknownCount"></span>
                         </div>
+
+                        <div class="optionGroup groupModeGroup" id="pageCategoryGroupOptions" style="display: none;">
+                            <div class="option active" id="page-category-none" onclick="onCategoryFilterClick(this)">
+                                <span>不分组</span>
+                            </div>
+                            <div class="option" id="page-category-group" onclick="onCategoryFilterClick(this)">
+                                <span>按类别</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="options subOptions" id="readWordOptions" style="display: none;">
                         <div class="option active" id="word-all" onclick="onWordFilterClick(this)">
@@ -117,6 +126,15 @@
                         <div class="option" id="word-unknown" onclick="onWordFilterClick(this)">
                             <span>未知</span>
                             <span class="count" id="wordUnknownCount"></span>
+                        </div>
+
+                        <div class="optionGroup groupModeGroup" id="wordCategoryGroupOptions" style="display: none;">
+                            <div class="option active" id="word-category-none" onclick="onCategoryFilterClick(this)">
+                                <span>不分组</span>
+                            </div>
+                            <div class="option" id="word-category-group" onclick="onCategoryFilterClick(this)">
+                                <span>按类别</span>
+                            </div>
                         </div>
                     </div>
                 </div>

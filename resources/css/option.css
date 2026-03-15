@@ -143,3 +143,24 @@
   flex: 0 0 160px;
   box-sizing: border-box;
 }
+
+.options.subOptions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.options.subOptions>.option {
+  flex-shrink: 0;
+}
+
+.options.subOptions #pageCategoryGroupOptions,
+.options.subOptions #wordCategoryGroupOptions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
