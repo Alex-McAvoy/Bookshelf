@@ -189,11 +189,19 @@ function renderBookList(bookList, options) {
                 .append($("<span>").text("书名："))
                 .append($("<span>").text("《" + book.name + "》"))
         );
-        $info.append(
-            $("<div>").addClass("authorNation")
-                .append($("<span>").text("作者："))
-                .append($("<span>").text(book.nation + book.author))
-        );
+        if ((book.nation + book.author).trim() !== "") {
+            $info.append(
+                $("<div>").addClass("authorNation")
+                    .append($("<span>").text("作者："))
+                    .append($("<span>").text(book.nation + book.author))
+            );
+        } else {
+            $info.append(
+                $("<div>").addClass("authorNation")
+                    .append($("<span>").text("作者："))
+                    .append($("<span>").text("暂无"))
+            );
+        }
         $info.append(
             $("<div>").addClass("media")
                 .append($("<span>").text("媒介："))
@@ -247,4 +255,122 @@ function renderBookList(bookList, options) {
     });
 
     return $list;
+}
+
+
+// 按年/按月分组渲染书籍列表（兼容媒介、页数、字数过滤）
+function renderGroupedBookList(bookList, groupMode, options) {
+    options = options || {};
+    var mediaFilter = options.mediaFilter || null;
+    var pageFilter = options.pageFilter || null;
+    var wordFilter = options.wordFilter || null;
+    var showComment = options.showComment || false;
+    var showRating = options.showRating || false;
+    var order = options.order || null;
+
+    // 排序（先整体排序，分组后每组保留顺序）
+    if (order === "rating") {
+        bookList = sortBookList(bookList, compareByRating);
+    } else if (order === "ReadYearAndRating") {
+        bookList = sortBookList(bookList, compareByReadYearAndRating);
+    }
+
+    // 先按现有逻辑过滤
+    var filteredList = [];
+    $.each(bookList, function (_, book) {
+        // 媒介过滤
+        if (mediaFilter && book.media !== mediaFilter)
+            return;
+
+        // 页数过滤
+        if (pageFilter) {
+            const pages = Number(book.pages);
+            if (pageFilter === "page-lt200" && (pages >= 200 || pages == 0))
+                return;
+            if (pageFilter === "page-200to500" && (pages < 200 || pages > 500))
+                return;
+            if (pageFilter === "page-gt500" && pages <= 500)
+                return;
+            if (pageFilter === "page-unknown" && pages != 0)
+                return;
+        }
+
+        // 字数过滤
+        if (wordFilter) {
+            const words = Number(book.words);
+            if (wordFilter === "word-lt100" && (words >= 100 || words == 0))
+                return;
+            if (wordFilter === "word-100to300" && (words < 100 || words >= 300))
+                return;
+            if (wordFilter === "word-300to500" && (words < 300 || words > 500))
+                return;
+            if (wordFilter === "word-gt500" && words <= 500)
+                return;
+            if (wordFilter === "word-unknown" && words != 0)
+                return;
+        }
+
+        filteredList.push(book);
+    });
+
+    // 分组容器
+    var $groupedList = $("<div>").addClass("groupedBookList");
+    var groupedBooks = {};
+
+    // 按年/按月分组
+    $.each(filteredList, function (_, book) {
+        // 这里假设你的字段是 readDate，例如 2025-08-03
+        // 如果你的实际字段名不是 readDate，请改这里
+        var readDate = (book.readDate || "").trim();
+        var groupKey = "未知";
+
+        if (readDate !== "") {
+            if (groupMode === "year") {
+                // 2025-08-03 -> 2025年
+                groupKey = readDate.substring(0, 4) + "年";
+            } else if (groupMode === "month") {
+                // 2025-08-03 -> 2025年08月
+                groupKey = readDate.substring(0, 7).replace("-", "年") + "月";
+            }
+        }
+
+        if (!groupedBooks[groupKey]) {
+            groupedBooks[groupKey] = [];
+        }
+
+        groupedBooks[groupKey].push(book);
+    });
+
+    // 分组排序：时间倒序，未知放最后
+    var groupKeys = Object.keys(groupedBooks).sort(function (a, b) {
+        if (a === "未知") return 1;
+        if (b === "未知") return -1;
+        return b.localeCompare(a);
+    });
+
+    // 渲染每个分组
+    $.each(groupKeys, function (_, groupKey) {
+        var booksInGroup = groupedBooks[groupKey];
+
+        var $groupSection = $("<div>").addClass("bookGroupSection");
+
+        var $groupTitle = $("<h2>").addClass("bookGroupTitle")
+            .append($("<span>").text(groupKey))
+            .append($("<span>").addClass("count").text(booksInGroup.length));
+
+        var $groupContent = $("<div>").addClass("bookGroupContent");
+        $groupContent.append(
+            renderBookList(booksInGroup, {
+                showComment: showComment,
+                showRating: showRating,
+                order: null
+            })
+        );
+
+        $groupSection.append($groupTitle);
+        $groupSection.append($groupContent);
+        $groupedList.append($groupSection);
+    });
+
+    return $groupedList;
 }

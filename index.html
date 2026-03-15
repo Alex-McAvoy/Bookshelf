@@ -42,78 +42,79 @@
         <div class="bookCollection" id="readBooks">
             <h1>读过 <span class="count" id="readCount"></span></h1>
             <div class="filterPanel">
-                <div class="options" id="readMediaOptions">
-                    <div class="option active" id="media-all" onclick="setOptionActive(this); refreshBookList();">
-                        <span>all</span>
-                        <span class="count" id="allBookCount"></span>
+                <div class="options splitOptions" id="readMediaOptions">
+                    <div class="optionGroup mediaFilterGroup">
+                        <div class="option active" id="media-all" onclick="onMediaFilterClick(this)">
+                            <span>all</span>
+                            <span class="count" id="allBookCount"></span>
+                        </div>
+                        <div class="option" id="media-pBook" onclick="onMediaFilterClick(this)">
+                            <span>纸质书</span>
+                            <span class="count" id="pBookCount"></span>
+                        </div>
+                        <div class="option" id="media-eBook" onclick="onMediaFilterClick(this)">
+                            <span>电子书</span>
+                            <span class="count" id="eBookCount"></span>
+                        </div>
                     </div>
-                    <div class="option" id="media-pBook"
-                        onclick="setOptionActive(this); refreshBookList({mediaFilter: '纸质书'});">
-                        <span>纸质书</span>
-                        <span class="count" id="pBookCount"></span>
-                    </div>
-                    <div class="option" id="media-eBook"
-                        onclick="setOptionActive(this); refreshBookList({mediaFilter: '电子书'});">
-                        <span>电子书</span>
-                        <span class="count" id="eBookCount"></span>
+
+                    <div class="optionGroup groupModeGroup">
+                        <div class="option active" id="group-none" onclick="onGroupModeClick(this)">
+                            <span>不分组</span>
+                        </div>
+                        <div class="option" id="group-year" onclick="onGroupModeClick(this)">
+                            <span>按年</span>
+                        </div>
+                        <div class="option" id="group-month" onclick="onGroupModeClick(this)">
+                            <span>按月</span>
+                        </div>
                     </div>
                 </div>
                 <div class="subOptionsWrapper" id="readSubOptions" style="display: none;">
                     <div class="options subOptions" id="readPageOptions" style="display: none;">
-                        <div class="option active" id="page-all"
-                            onclick="setOptionActive(this); refreshBookList({mediaFilter: '纸质书'});">
+                        <div class="option active" id="page-all" onclick="onPageFilterClick(this)">
                             <span>all</span>
                             <span class="count" id="pageAllCount"></span>
                         </div>
-                        <div class="option" id="page-lt200"
-                            onclick="setOptionActive(this); refreshBookList({mediaFilter: '纸质书', pageFilter: 'page-lt200'});">
+                        <div class="option" id="page-lt200" onclick="onPageFilterClick(this)">
                             <span>200页以下</span>
                             <span class="count" id="pageLt200Count"></span>
                         </div>
-                        <div class="option" id="page-200to500"
-                            onclick="setOptionActive(this); refreshBookList({mediaFilter: '纸质书', pageFilter: 'page-200to500'});">
+                        <div class="option" id="page-200to500" onclick="onPageFilterClick(this)">
                             <span>200页到500页</span>
                             <span class="count" id="page200to500Count"></span>
                         </div>
-                        <div class="option" id="page-gt500"
-                            onclick="setOptionActive(this); refreshBookList({mediaFilter: '纸质书', pageFilter: 'page-gt500'});">
+                        <div class="option" id="page-gt500" onclick="onPageFilterClick(this)">
                             <span>500页以上</span>
                             <span class="count" id="pageGt500Count"></span>
                         </div>
-                        <div class="option" id="page-unknown"
-                            onclick="setOptionActive(this); refreshBookList({mediaFilter: '纸质书', pageFilter: 'page-unknown'});">
+                        <div class="option" id="page-unknown" onclick="onPageFilterClick(this)">
                             <span>未知</span>
                             <span class="count" id="pageUnknownCount"></span>
                         </div>
                     </div>
                     <div class="options subOptions" id="readWordOptions" style="display: none;">
-                        <div class="option active" id="word-all"
-                            onclick="setOptionActive(this); refreshBookList({mediaFilter: '电子书'});">
+                        <div class="option active" id="word-all" onclick="onWordFilterClick(this)">
                             <span>all</span>
                             <span class="count" id="wordAllCount"></span>
                         </div>
-                        <div class="option" id="word-lt100"
-                            onclick="setOptionActive(this); refreshBookList({mediaFilter: '电子书', wordFilter: 'word-lt100'});">
+                        <div class="option" id="word-lt100" onclick="onWordFilterClick(this)">
                             <span>100万字以下</span>
                             <span class="count" id="wordLt100Count"></span>
                         </div>
-                        <div class="option" id="word-100to300"
-                            onclick="setOptionActive(this); refreshBookList({mediaFilter: '电子书', wordFilter: 'word-100to300'});">
+                        <div class="option" id="word-100to300" onclick="onWordFilterClick(this)">
                             <span>100万字到300万字</span>
                             <span class="count" id="word100to300Count"></span>
                         </div>
-                        <div class="option" id="word-300to500"
-                            onclick="setOptionActive(this); refreshBookList({mediaFilter: '电子书', wordFilter: 'word-300to500'});">
+                        <div class="option" id="word-300to500" onclick="onWordFilterClick(this)">
                             <span>300万字到500万字</span>
                             <span class="count" id="word300to500Count"></span>
                         </div>
-                        <div class="option" id="word-gt500"
-                            onclick="setOptionActive(this); refreshBookList({mediaFilter: '电子书', wordFilter: 'word-gt500'});">
+                        <div class="option" id="word-gt500" onclick="onWordFilterClick(this)">
                             <span>500万字以上</span>
                             <span class="count" id="wordGt500Count"></span>
                         </div>
-                        <div class="option" id="word-unknown"
-                            onclick="setOptionActive(this); refreshBookList({mediaFilter: '电子书', wordFilter: 'word-unknown'});">
+                        <div class="option" id="word-unknown" onclick="onWordFilterClick(this)">
                             <span>未知</span>
                             <span class="count" id="wordUnknownCount"></span>
                         </div>

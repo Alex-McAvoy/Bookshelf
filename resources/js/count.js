@@ -68,7 +68,7 @@ function getWordCount(bookList, wordFilter) {
                     count++;
                 break;
             case "word-300to500":
-                if (words >= 300 && words < 500)
+                if (words >= 300 && words <= 500)
                     count++;
                 break;
             case "word-gt500":

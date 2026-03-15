@@ -82,3 +82,64 @@
   margin-top: 0;
   background: transparent;
 }
+
+.options.splitOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+.options.splitOptions .optionGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.options.splitOptions .mediaFilterGroup {
+  justify-content: flex-start;
+}
+
+.options.splitOptions .groupModeGroup {
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.bookGroupSection {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 0;
+}
+
+.bookGroupTitle {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.bookGroupTitle .count {
+  margin: 0 10px;
+  padding: 0 10px;
+  vertical-align: 3px;
+  font-size: 24px;
+  font-weight: normal;
+  border-radius: 15px;
+  background: #ddd;
+  color: #666;
+}
+
+.bookGroupContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0;
+}
+
+.bookGroupContent .book {
+  flex: 0 0 160px;
+  box-sizing: border-box;
+}
