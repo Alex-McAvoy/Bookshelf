@@ -39,20 +39,22 @@ function compareByReadYearAndRating(a, b) {
     return compareByRating(a, b);
 }
 
-// 获取月份
-function getMonth(date) {
-    if (!date)
-        return "";
-    var parts = date.split("-");
-    return parts.length >= 2 ? parts[0] + "年" + Number(parts[1]) + "月" : "";
-}
+// 将任意日期字符串规范化显示
+function formatBookDate(dateStr) {
+    if (!dateStr || dateStr.trim() === "") return "暂无";
 
-// 获取年份
-function getYear(date) {
-    if (!date)
-        return "";
-    var parts = date.split("-");
-    return parts.length >= 1 ? parts[0] + "年" : "";
+    const parts = dateStr.trim().split("-");
+    const year = parts[0] ? parseInt(parts[0], 10) : null;
+    const month = parts[1] ? parseInt(parts[1], 10) : null;
+    const day = parts[2] ? parseInt(parts[2], 10) : null;
+
+    if (!year) return "暂无";
+
+    let result = year + "年";
+    if (month !== null) result += month + "月";
+    if (day !== null) result += day + "日";
+
+    return result;
 }
 
 // 渲染书架
@@ -153,7 +155,17 @@ function renderBookList(bookList, options) {
                     .append($("<span>").text("ISBN："))
                     .append($("<span>").text(book.ISBN ? book.ISBN : "暂无"))
             );
+            $detail.append(
+                $("<div>").addClass("date")
+                    .append($("<span>").text("阅读时间："))
+                    .append($("<span>").text(formatBookDate(book.date)))
+            );
         } else {
+            $detail.append(
+                $("<div>").addClass("date")
+                    .append($("<span>").text("阅读时间："))
+                    .append($("<span>").text(formatBookDate(book.date)))
+            );
             $detail.append(
                 $("<div>").addClass("ISBN placeholder")
                     .append($("<span>").text("ISBN："))
@@ -315,39 +327,43 @@ function renderGroupedBookList(bookList, groupMode, options) {
     // 分组容器
     var $groupedList = $("<div>").addClass("groupedBookList");
     var groupedBooks = {};
+    var groupKeysMap = {};
 
-    // 按年/按月分组
     $.each(filteredList, function (_, book) {
         var readDate = (book.date || "").trim();
         var groupKey = "未知";
+        var yearNum = 0, monthNum = 0;
 
         if (readDate !== "") {
             const parts = readDate.split("-");
-            const year = parts[0]; // 年份
-            const month = parts[1] ? parseInt(parts[1], 10) : null; // 月份
+            yearNum = parseInt(parts[0], 10);
+            monthNum = parts[1] ? parseInt(parts[1], 10) : 0;
+
             if (groupMode === "year") {
-                groupKey = year + "年";
+                groupKey = yearNum + "年";
             } else if (groupMode === "month") {
-                if (month !== null) {
-                    groupKey = year + "年" + month + "月";
-                } else {
-                    groupKey = year + "年";
-                }
+                groupKey = monthNum ? (yearNum + "年" + monthNum + "月") : (yearNum + "年");
             }
         }
 
         if (!groupedBooks[groupKey]) {
             groupedBooks[groupKey] = [];
+            groupKeysMap[groupKey] = { year: yearNum, month: monthNum };
         }
 
         groupedBooks[groupKey].push(book);
     });
 
-    // 分组排序：时间倒序，未知放最后
+    // 分组排序：先按年降序，再按月降序，未知放最后
     var groupKeys = Object.keys(groupedBooks).sort(function (a, b) {
         if (a === "未知") return 1;
         if (b === "未知") return -1;
-        return b.localeCompare(a);
+
+        const keyA = groupKeysMap[a];
+        const keyB = groupKeysMap[b];
+
+        if (keyA.year !== keyB.year) return keyB.year - keyA.year;
+        return keyB.month - keyA.month;
     });
 
     // 渲染每个分组

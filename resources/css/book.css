@@ -89,6 +89,7 @@
 
 .bookInfo-detail .bookList .book .detail > div.media,
 .bookInfo-detail .bookList .book .detail > div.category,
+.bookInfo-detail .bookList .book .detail > div.date,
 .bookInfo-detail .bookList .book .detail > div.publisher,
 .bookInfo-detail .bookList .book .detail > div.ISBN {
   display: flex;
@@ -98,15 +99,17 @@
 
 .bookInfo-detail .bookList .book .detail > div.media span:first-child,
 .bookInfo-detail .bookList .book .detail > div.category span:first-child,
+.bookInfo-detail .bookList .book .detail > div.date span:first-child,
 .bookInfo-detail .bookList .book .detail > div.publisher span:first-child,
 .bookInfo-detail .bookList .book .detail > div.ISBN span:first-child,
 .bookInfo-detail .bookList .book .detail .bookFooter > div.rating span:first-child {
-  flex: 0 0 60px;
+  flex: 0 0 75px;
   font-weight: bold;
 }
 
 .bookInfo-detail .bookList .book .detail > div.media span:last-child,
 .bookInfo-detail .bookList .book .detail > div.category span:last-child,
+.bookInfo-detail .bookList .book .detail > div.date span:last-child,
 .bookInfo-detail .bookList .book .detail > div.publisher span:last-child,
 .bookInfo-detail .bookList .book .detail > div.ISBN span:last-child {
   flex: 1;
