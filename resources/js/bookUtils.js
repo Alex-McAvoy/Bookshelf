@@ -32,8 +32,8 @@ function compareByRating(a, b) {
 
 // 按阅读年份与评分排序
 function compareByReadYearAndRating(a, b) {
-    var y1 = Number((a.readDate || "").split("-")[0]) || 0;
-    var y2 = Number((b.readDate || "").split("-")[0]) || 0;
+    var y1 = Number((a.date || "").split("-")[0]) || 0;
+    var y2 = Number((b.date || "").split("-")[0]) || 0;
     if (y1 !== y2)
         return y2 - y1;
     return compareByRating(a, b);
