@@ -179,13 +179,21 @@ function renderBookList(bookList, options) {
                     .append($("<span>").text(formatBookDate(book.date)))
             );
             if (showRating && book.rating) {
-                var stars = ["", "★", "★★", "★★★", "★★★★", "★★★★★"];
-                var hollowStars = ["", "☆☆☆☆", "☆☆☆", "☆☆", "☆", ""];
+                var stars = [
+                    "", "★", "★★", "★★★", "★★★★", "★★★★★",
+                    "★★★★★★", "★★★★★★★", "★★★★★★★★",
+                    "★★★★★★★★★", "★★★★★★★★★★"
+                ];
+                var hollowStars = [
+                    "☆☆☆☆☆☆☆☆☆☆", "☆☆☆☆☆☆☆☆☆",
+                    "☆☆☆☆☆☆☆☆", "☆☆☆☆☆☆☆", "☆☆☆☆☆☆",
+                    "☆☆☆☆☆", "☆☆☆☆", "☆☆☆", "☆☆", "☆", ""
+                ];
                 $detail.append(
-                $("<div>").addClass("rating")
-                    .append($("<span>").text("评分："))
-                    .append($("<span>").addClass("star").text(stars[Number(book.rating)]))
-                    .append($("<span>").addClass("hollowStar").text(hollowStars[Number(book.rating)]))
+                    $("<div>").addClass("rating")
+                        .append($("<span>").text("评分："))
+                        .append($("<span>").addClass("star").text(stars[Number(book.rating)]))
+                        .append($("<span>").addClass("hollowStar").text(hollowStars[Number(book.rating)]))
                 );
             } else {
                 $detail.append(
@@ -201,13 +209,21 @@ function renderBookList(bookList, options) {
                     .append($("<span>").text(formatBookDate(book.date)))
             );
             if (showRating && book.rating) {
-                var stars = ["", "★", "★★", "★★★", "★★★★", "★★★★★"];
-                var hollowStars = ["", "☆☆☆☆", "☆☆☆", "☆☆", "☆", ""];
+                var stars = [
+                    "", "★", "★★", "★★★", "★★★★", "★★★★★",
+                    "★★★★★★", "★★★★★★★", "★★★★★★★★",
+                    "★★★★★★★★★", "★★★★★★★★★★"
+                ];
+                var hollowStars = [
+                    "☆☆☆☆☆☆☆☆☆☆", "☆☆☆☆☆☆☆☆☆",
+                    "☆☆☆☆☆☆☆☆", "☆☆☆☆☆☆☆", "☆☆☆☆☆☆",
+                    "☆☆☆☆☆", "☆☆☆☆", "☆☆☆", "☆☆", "☆", ""
+                ];
                 $detail.append(
-                $("<div>").addClass("rating")
-                    .append($("<span>").text("评分："))
-                    .append($("<span>").addClass("star").text(stars[Number(book.rating)]))
-                    .append($("<span>").addClass("hollowStar").text(hollowStars[Number(book.rating)]))
+                    $("<div>").addClass("rating")
+                        .append($("<span>").text("评分："))
+                        .append($("<span>").addClass("star").text(stars[Number(book.rating)]))
+                        .append($("<span>").addClass("hollowStar").text(hollowStars[Number(book.rating)]))
                 );
             } else {
                 $detail.append(
@@ -265,8 +281,16 @@ function renderBookList(bookList, options) {
             );
         }
         if (showRating && book.rating) {
-            var stars = ["", "★", "★★", "★★★", "★★★★", "★★★★★"];
-            var hollowStars = ["", "☆☆☆☆", "☆☆☆", "☆☆", "☆", ""];
+            var stars = [
+                "", "★", "★★", "★★★", "★★★★", "★★★★★",
+                "★★★★★★", "★★★★★★★", "★★★★★★★★",
+                "★★★★★★★★★", "★★★★★★★★★★"
+            ];
+            var hollowStars = [
+                "☆☆☆☆☆☆☆☆☆☆", "☆☆☆☆☆☆☆☆☆",
+                "☆☆☆☆☆☆☆☆", "☆☆☆☆☆☆☆", "☆☆☆☆☆☆",
+                "☆☆☆☆☆", "☆☆☆☆", "☆☆☆", "☆☆", "☆", ""
+            ];
             $info.append(
                 $("<div>").addClass("rating")
                     .append($("<span>").text("评分："))
