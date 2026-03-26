@@ -178,26 +178,48 @@ function renderBookList(bookList, options) {
                     .append($("<span>").text("阅读时间："))
                     .append($("<span>").text(formatBookDate(book.date)))
             );
+            if (showRating && book.rating) {
+                var stars = ["", "★", "★★", "★★★", "★★★★", "★★★★★"];
+                var hollowStars = ["", "☆☆☆☆", "☆☆☆", "☆☆", "☆", ""];
+                $detail.append(
+                $("<div>").addClass("rating")
+                    .append($("<span>").text("评分："))
+                    .append($("<span>").addClass("star").text(stars[Number(book.rating)]))
+                    .append($("<span>").addClass("hollowStar").text(hollowStars[Number(book.rating)]))
+                );
+            } else {
+                $detail.append(
+                    $("<div>").addClass("rating")
+                        .append($("<span>").text("评分："))
+                        .append($("<span>").text("暂无"))
+                );
+            }
         } else {
             $detail.append(
                 $("<div>").addClass("date")
                     .append($("<span>").text("阅读时间："))
                     .append($("<span>").text(formatBookDate(book.date)))
             );
+            if (showRating && book.rating) {
+                var stars = ["", "★", "★★", "★★★", "★★★★", "★★★★★"];
+                var hollowStars = ["", "☆☆☆☆", "☆☆☆", "☆☆", "☆", ""];
+                $detail.append(
+                $("<div>").addClass("rating")
+                    .append($("<span>").text("评分："))
+                    .append($("<span>").addClass("star").text(stars[Number(book.rating)]))
+                    .append($("<span>").addClass("hollowStar").text(hollowStars[Number(book.rating)]))
+                );
+            } else {
+                $detail.append(
+                    $("<div>").addClass("rating")
+                        .append($("<span>").text("评分："))
+                        .append($("<span>").text("暂无"))
+                );
+            }
             $detail.append(
                 $("<div>").addClass("ISBN placeholder")
                     .append($("<span>").text("ISBN："))
                     .append($("<span>").text("暂无"))
-            );
-        }
-        if (showRating && book.rating) {
-            var stars = ["", "★", "★★", "★★★", "★★★★", "★★★★★"];
-            var hollowStars = ["", "☆☆☆☆", "☆☆☆", "☆☆", "☆", ""];
-            $detail.append(
-            $("<div>").addClass("rating")
-                .append($("<span>").text("评分："))
-                .append($("<span>").addClass("star").text(stars[Number(book.rating)]))
-                .append($("<span>").addClass("hollowStar").text(hollowStars[Number(book.rating)]))
             );
         }
 
