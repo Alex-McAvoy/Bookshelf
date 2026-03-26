@@ -215,7 +215,7 @@ function renderBookList(bookList, options) {
             );
         } else {
             $info.append(
-                $("<div>").addClass("authorNation")
+                $("<div>").addClass("authorNation placeholder")
                     .append($("<span>").text("作者："))
                     .append($("<span>").text("暂无"))
             );
@@ -240,12 +240,6 @@ function renderBookList(bookList, options) {
                 $("<div>").addClass("ISBN")
                     .append($("<span>").text("ISBN："))
                     .append($("<span>").text(book.ISBN ? book.ISBN : "暂无"))
-            );
-        } else {
-            $info.append(
-                $("<div>").addClass("ISBN")
-                    .append($("<span>").text(""))
-                    .append($("<span>").text(""))
             );
         }
         if (showRating && book.rating) {
