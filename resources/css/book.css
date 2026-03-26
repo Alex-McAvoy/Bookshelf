@@ -122,49 +122,43 @@
   visibility: hidden;
 }
 
-.bookInfo-detail .bookList .book .comment {
+.bookInfo-detail .bookList .book .name {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 2px;
-  margin-top: 0;
-  font-size: 13px;
-  line-height: 1;
-  flex: 0 0 auto;
+  justify-content: center;
+  gap: 6px;
 }
 
-.bookInfo-detail .bookList .book .comment > span:first-child {
-  font-weight: bold;
-  flex: none;
-}
-
-.bookInfo-detail .bookList .book .comment .icon {
-  display: inline-block;
-  color: gray;
-  font-weight: bold;
-  cursor: pointer;
+.bookInfo-detail .bookList .book .name .comment-inline .icon {
   font-size: 14px;
-  flex: none;
+  color: gray;
+  cursor: pointer;
 }
 
-.bookInfo-detail .bookList .book .comment .content {
+.bookInfo-detail .bookList .book .name .comment-inline .content {
   display: none;
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: 120%;
+  left: 50%;
+  transform: translateX(-50%);
   width: 200px;
   background: #F8DFA4;
   border: 1px solid #aaa;
-  padding: 5px;
+  padding: 6px;
   border-radius: 5px;
-  font-size: 14px;
   color: #555;
-  z-index: 10;
+  z-index: 20;
+  
+  font-family: 仿宋;
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: 0.2px;
   text-align: justify;
   word-break: break-word;
 }
 
-.bookInfo-detail .bookList .book .comment:hover .content {
+.bookInfo-detail .bookList .book .name .comment-inline:hover .content {
   display: block;
 }
 
