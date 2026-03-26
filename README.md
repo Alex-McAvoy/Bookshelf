@@ -1,6 +1,10 @@
 # Bookshelf
 
+## 说明
+
 托管于个人博客中的电子书架，个人阅读记录
+
+效果浏览：https://alex-mcavoy.github.io/bookshelf/index.html
 
 ## git 提交规范
 
