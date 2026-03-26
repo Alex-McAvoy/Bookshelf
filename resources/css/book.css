@@ -102,7 +102,7 @@
 .bookInfo-detail .bookList .book .detail > div.date span:first-child,
 .bookInfo-detail .bookList .book .detail > div.publisher span:first-child,
 .bookInfo-detail .bookList .book .detail > div.ISBN span:first-child,
-.bookInfo-detail .bookList .book .detail .bookFooter > div.rating span:first-child {
+.bookInfo-detail .bookList .book .detail > div.rating span:first-child {
   flex: 0 0 75px;
   font-weight: bold;
 }
@@ -163,13 +163,11 @@
 }
 
 .bookInfo-detail .bookList .book .rating {
-  margin-top: 0;
-  margin-left: auto;
+  display: flex;
+  margin-bottom: 4px;
+  align-items: flex-start;
   font-size: 14px;
-  line-height: 1;
-  letter-spacing: 2px;
-  text-align: right;
-  white-space: nowrap;
+  line-height: 1.4;
 }
 
 .bookInfo-detail .bookList .book .rating .star {
@@ -178,13 +176,6 @@
 
 .bookInfo-detail .bookList .book .rating .hollowStar {
   color: #555;
-}
-
-.bookInfo-detail .bookList .book .detail .bookFooter {
-  display: flex;
-  align-items: center;
-  margin-top: 8px;
-  min-height: 24px;
 }
 
 /* ---------------------- 大图模式 ---------------------- */

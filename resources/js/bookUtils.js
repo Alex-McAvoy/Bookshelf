@@ -123,7 +123,6 @@ function renderBookList(bookList, options) {
         var $image = $("<div>").addClass("image");
         var $detail = $("<div>").addClass("detail");
         var $info = $("<div>").addClass("info hidden");
-        var $bookFooter = $("<div>").addClass("bookFooter");
 
         // 封面
         var basePath = "./resources/images/books/";
@@ -194,15 +193,12 @@ function renderBookList(bookList, options) {
         if (showRating && book.rating) {
             var stars = ["", "★", "★★", "★★★", "★★★★", "★★★★★"];
             var hollowStars = ["", "☆☆☆☆", "☆☆☆", "☆☆", "☆", ""];
-            $bookFooter.append(
-                $("<div>").addClass("rating")
-                    .append($("<span>").text("评分："))
-                    .append($("<span>").addClass("star").text(stars[Number(book.rating)]))
-                    .append($("<span>").addClass("hollowStar").text(hollowStars[Number(book.rating)]))
+            $detail.append(
+            $("<div>").addClass("rating")
+                .append($("<span>").text("评分："))
+                .append($("<span>").addClass("star").text(stars[Number(book.rating)]))
+                .append($("<span>").addClass("hollowStar").text(hollowStars[Number(book.rating)]))
             );
-        }
-        if (showComment || showRating) {
-            $detail.append($bookFooter);
         }
 
         // 大图/小图模式
@@ -264,7 +260,7 @@ function renderBookList(bookList, options) {
         }
         if (showComment && book.comment) {
             $info.append(
-                $("<div>").addClass("rating")
+                $("<div>").addClass("comment")
                     .append($("<span>").text("备注："))
                     .append($("<span>").text(book.comment))
             );
