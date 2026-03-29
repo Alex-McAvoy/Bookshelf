@@ -6,7 +6,7 @@
 
 /* ---------------------- 详情模式 ---------------------- */
 .bookInfo-detail .bookList .book {
-  width: 240px;
+  width: 260px;
   margin: 15px;
   background: url("../images/common/bottom.png") no-repeat center bottom;
   background-size: 100% auto;
