@@ -32,11 +32,29 @@ function compareByRating(a, b) {
 
 // 按阅读年份与评分排序
 function compareByReadYearAndRating(a, b) {
-    var y1 = Number((a.date || "").split("-")[0]) || 0;
-    var y2 = Number((b.date || "").split("-")[0]) || 0;
-    if (y1 !== y2)
-        return y2 - y1;
-    return compareByRating(a, b);
+    var date1 = (a.date|| "").split("-")
+    var date2 = (b.date|| "").split("-")
+    var year1 = Number(date1[0]) || 0;
+    var year2 = Number(date2[0]) || 0;
+    var month1 = Number(date1[1]) || 0;
+    var month2 = Number(date2[1]) || 0;
+    var day1 = Number(date1[2]) || 0;
+    var day2 = Number(date2[2]) || 0;
+
+    if (year1 == year2) {
+        if (month1 == month2) {
+            if (day1 == day2) {
+                return compareByRating(a, b);
+            } else {
+                return day2 - day1;
+            }
+        } else {
+            return month2 - month1;
+        }
+    } else {
+        if (year1 !== year2)
+            return year2 - year1;
+    }
 }
 
 // 将任意日期字符串规范化显示
