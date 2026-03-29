@@ -41,7 +41,7 @@
 }
 
 .bookInfo-detail .bookList .book .image {
-  width: calc(100% - 20px);
+  width: calc(100% - 50px);
   height: 260px;
   margin: 10px auto 0 auto;
   position: relative;
