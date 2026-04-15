@@ -136,13 +136,14 @@
   cursor: pointer;
 }
 
-.bookInfo-detail .bookList .book .name .comment-inline .content {
+.bookInfo-detail .bookList .book .name .comment-inline .content-small,
+.bookInfo-detail .bookList .book .name .comment-inline .content-medium,
+.bookInfo-detail .bookList .book .name .comment-inline .content-large {
   display: none;
   position: absolute;
   top: 120%;
   left: 50%;
   transform: translateX(-50%);
-  width: 200px;
   background: #F8DFA4;
   border: 1px solid #aaa;
   padding: 6px;
@@ -158,7 +159,23 @@
   word-break: break-word;
 }
 
-.bookInfo-detail .bookList .book .name .comment-inline:hover .content {
+.bookInfo-detail .bookList .book .name .comment-inline .content-small {
+  width: 200px;
+}
+
+.bookInfo-detail .bookList .book .name .comment-inline .content-medium {
+  width: 500px;
+  text-indent: 2em;
+}
+
+.bookInfo-detail .bookList .book .name .comment-inline .content-large {
+  width: 700px;
+  text-indent: 2em;
+}
+
+.bookInfo-detail .bookList .book .name .comment-inline:hover .content-small,
+.bookInfo-detail .bookList .book .name .comment-inline:hover .content-medium,
+.bookInfo-detail .bookList .book .name .comment-inline:hover .content-large {
   display: block;
 }
 
@@ -238,11 +255,12 @@
 
 
 /* ---------------------- hover 弹窗 ---------------------- */
-.book .info {
+.book .info-small,
+.book .info-medium,
+.book .info-large {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 240px;
   display: none;
   background: #F8DFA4;
   border: 1px solid #aaa;
@@ -256,24 +274,46 @@
   word-break: break-word;
 }
 
-.book .info > div {
+.book .info-small {
+  width: 240px;
+}
+
+.book .info-medium {
+  width: 400px;
+}
+
+.book .info-large {
+  width: 600px;
+}
+
+.book .info-small > div,
+.book .info-medium > div,
+.book .info-large > div {
   display: flex;
   margin-bottom: 6px;
   align-items: flex-start; 
 }
 
-.book .info > div span:first-child {
+.book .info-small > div span:first-child,
+.book .info-medium > div span:first-child,
+.book .info-large > div span:first-child {
   flex: 0 0 60px;
   font-weight: bold;
 }
 
-.book .info > div span:last-child {
+.book .info-small > div span:last-child,
+.book .info-medium > div span:last-child,
+.book .info-large > div span:last-child {
   flex: 1;
   text-align: left;
   word-break: break-word;
 }
 
-.bookInfo-bigImage .bookList .book:hover .info:not(.hidden),
-.bookInfo-smallImage .bookList .book:hover .info:not(.hidden) {
+.bookInfo-bigImage .bookList .book:hover .info-small,
+.bookInfo-bigImage .bookList .book:hover .info-medium,
+.bookInfo-bigImage .bookList .book:hover .info-large,
+.bookInfo-smallImage .bookList .book:hover .info-small,
+.bookInfo-smallImage .bookList .book:hover .info-medium,
+.bookInfo-smallImage .bookList .book:hover .info-large {
   display: block;
 }

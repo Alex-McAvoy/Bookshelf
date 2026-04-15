@@ -140,7 +140,6 @@ function renderBookList(bookList, options) {
         var $book = $("<div>").addClass("book");
         var $image = $("<div>").addClass("image");
         var $detail = $("<div>").addClass("detail");
-        var $info = $("<div>").addClass("info hidden");
 
         // 封面
         var basePath = "./resources/images/books/";
@@ -152,11 +151,25 @@ function renderBookList(bookList, options) {
         // 详情模式
         var $name = $("<div>").addClass("name").append($("<span>").text("《" + book.name + "》"));
         if (showComment && book.comment) {
-            $name.append(
-                $("<span>").addClass("comment-inline")
-                    .append($("<span>").addClass("icon").text(" ⓘ"))
-                    .append($("<span>").addClass("content").text(book.comment))
-            );
+            if (book.comment.length < 200) {
+                $name.append(
+                    $("<span>").addClass("comment-inline")
+                        .append($("<span>").addClass("icon").text(" ⓘ"))
+                        .append($("<span>").addClass("content-small").text(book.comment))
+                );
+            } else if (book.comment.length < 400) {
+                $name.append(
+                    $("<span>").addClass("comment-inline")
+                        .append($("<span>").addClass("icon").text(" ⓘ"))
+                        .append($("<span>").addClass("content-medium").html(book.comment))
+                );
+            } else {
+                $name.append(
+                    $("<span>").addClass("comment-inline")
+                        .append($("<span>").addClass("icon").text(" ⓘ"))
+                        .append($("<span>").addClass("content-large").html(book.comment))
+                );
+            }
         }
         $detail.append($name);
         if ((book.nation + book.author).trim() !== "") {
@@ -257,6 +270,15 @@ function renderBookList(bookList, options) {
             );
         }
 
+        // 结点
+        var $info = $("<div>");
+        if (book.comment.length < 200) {
+            $info.addClass("info-small hidden")
+        } else if (book.comment.length < 400) {
+            $info.addClass("info-medium hidden")
+        } else {
+            $info.addClass("info-large hidden")
+        }
         // 大图/小图模式
         $info.append(
             $("<div>").addClass("name")
@@ -320,7 +342,7 @@ function renderBookList(bookList, options) {
             $info.append(
                 $("<div>").addClass("comment")
                     .append($("<span>").text("备注："))
-                    .append($("<span>").text(book.comment))
+                    .append($("<span>").html(book.comment))
             );
         }
 
