@@ -68,7 +68,7 @@
 }
 
 .bookInfo-detail .bookList .book .detail {
-  padding: 10px;
+  padding: 10px 6px;
   font-size: 14px;
   line-height: 1.4em;
   color: #333;
@@ -127,7 +127,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
+}
+
+.bookInfo-detail .bookList .book .name > span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .bookInfo-detail .bookList .book .name .comment-inline .icon {
