@@ -150,7 +150,10 @@ function renderBookList(bookList, options) {
 
         // 详情模式
         var $name = $("<div>").addClass("name").append($("<span>").text("《" + book.name + "》"));
-        if (showComment && book.comment) {
+        if (showComment) {
+            if (!book.comment) {
+                book.comment = "暂无";
+            }
             if (book.comment.length < 200) {
                 $name.append(
                     $("<span>").addClass("comment-inline")
