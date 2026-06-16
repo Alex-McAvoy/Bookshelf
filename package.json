@@ -1,27 +1,25 @@
 ﻿{
-    "name":  "bookshelf",
-    "version":  "1.0.0",
-    "description":  "托管于个人博客中的电子书架，个人阅读记录",
-    "main":  "index.js",
-    "scripts":  {
-                    "test":  "echo \"Error: no test specified\" \u0026\u0026 exit 1",
-                    "convert:covers":  "node scripts/convert-covers.js"
-                },
-    "repository":  {
-                       "type":  "git",
-                       "url":  "git+https://github.com/Alex-McAvoy/Bookshelf.git"
-                   },
-    "keywords":  [
-
-                 ],
-    "author":  "",
-    "license":  "ISC",
-    "type":  "commonjs",
-    "bugs":  {
-                 "url":  "https://github.com/Alex-McAvoy/Bookshelf/issues"
-             },
-    "homepage":  "https://github.com/Alex-McAvoy/Bookshelf#readme",
-    "devDependencies":  {
-                            "sharp":  "^0.35.1"
-                        }
+    "name": "bookshelf",
+    "version": "1.0.0",
+    "description": "托管于个人博客中的电子书架，个人阅读记录",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" \u0026\u0026 exit 1",
+        "convert:covers": "node scripts/convert-covers.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Alex-McAvoy/Bookshelf.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "commonjs",
+    "bugs": {
+        "url": "https://github.com/Alex-McAvoy/Bookshelf/issues"
+    },
+    "homepage": "https://github.com/Alex-McAvoy/Bookshelf#readme",
+    "devDependencies": {
+        "sharp": "^0.35.1"
+    }
 }
