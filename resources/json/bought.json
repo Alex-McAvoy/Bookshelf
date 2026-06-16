@@ -1,0 +1,36 @@
+[
+  {
+    "id": "23",
+    "name": "围城",
+    "author": "钱钟书",
+    "nation": "〔中〕",
+    "category": "小说",
+    "pages": "362",
+    "words": "",
+    "publisher": "人民文学出版社",
+    "ISBN": "978-7-02-017221-4",
+    "media": "纸质书",
+    "date": "",
+    "rating": "",
+    "state": "已购买",
+    "comment": "",
+    "imageURL": "23.jpg"
+  },
+  {
+    "id": "24",
+    "name": "大师与玛格丽特",
+    "author": "布尔加科夫",
+    "nation": "〔苏〕",
+    "category": "小说",
+    "pages": "455",
+    "words": "",
+    "publisher": "上海译文出版社",
+    "ISBN": "978-7-5327-9664-9",
+    "media": "纸质书",
+    "date": "",
+    "rating": "",
+    "state": "已购买",
+    "comment": "",
+    "imageURL": "24.jpg"
+  }
+]

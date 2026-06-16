@@ -11,7 +11,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Language" content="zh-cn">
     <script src="./resources/js/jquery-3.6.0.min.js" charset="UTF-8"></script>
-    <script src="./resources/js/markdown.js" charset="UTF-8"></script>
     <script src="./resources/js/bookUtils.js" charset="UTF-8"></script>
     <script src="./resources/js/button.js" charset="UTF-8"></script>
     <script src="./resources/js/count.js" charset="UTF-8"></script>
@@ -164,13 +163,21 @@
 <script>
     $(function () {
         // 读取书籍数据
-        $.get("./resources/markdown/books.md", function (md) {
-            // 解析书籍信息
-            var BOOKS = parseMarkdownTable(md);
+        $.when(
+            $.getJSON("./resources/json/reading.json"),
+            $.getJSON("./resources/json/read.json"),
+            $.getJSON("./resources/json/bought.json"),
+            $.getJSON("./resources/json/purchase.json")
+        ).done(function (readingResult, readResult, boughtResult, purchaseResult) {
+            var BOOKS = {
+                reading: readingResult[0],
+                read: readResult[0],
+                bought: boughtResult[0],
+                purchase: purchaseResult[0]
+            };
             window.BOOK_COLLECTIONS = {
                 readingBooks: BOOKS.reading,
                 boughtBooks: BOOKS.bought,
-                suspendedBooks: BOOKS.suspended,
                 readingHistory: BOOKS.read,
                 purchaseBooks: BOOKS.purchase
             };
