@@ -14,7 +14,7 @@
     "rating": "",
     "state": "在读",
     "comment": "",
-    "imageURL": "0001.png"
+    "imageURL": "0001.webp"
   },
   {
     "id": "0018",
@@ -31,7 +31,7 @@
     "rating": "7",
     "state": "在读",
     "comment": "",
-    "imageURL": "0018.jpg"
+    "imageURL": "0018.webp"
   },
   {
     "id": "0027",
@@ -48,7 +48,7 @@
     "rating": "",
     "state": "在读",
     "comment": "那些无法挽回的，那些刻骨铭心的，那些苦熬过去的时光，都会成为亚瑟爵士午夜梦回的阵痛",
-    "imageURL": "0027.jpg"
+    "imageURL": "0027.webp"
   },
   {
     "id": "0031",
@@ -65,6 +65,6 @@
     "rating": "5",
     "state": "在读",
     "comment": "神作和神屎居然在同一本上同时出现",
-    "imageURL": "0031.jpg"
+    "imageURL": "0031.webp"
   }
 ]
