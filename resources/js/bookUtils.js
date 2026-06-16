@@ -144,7 +144,7 @@ function renderBookList(bookList, options) {
         // 封面
         var imageSrc = (book.imageURL && book.imageURL.trim() !== "")
             ? "./resources/images/webp/" + book.imageURL
-            : "./resources/images/books/default.png";
+            : "./resources/images/webp/default.webp";
         $image.append($("<img>").attr("src", imageSrc).attr("loading", "lazy").attr("decoding", "async"));
 
         // 详情模式
