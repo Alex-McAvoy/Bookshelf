@@ -20,6 +20,7 @@ const { minify: minifyHtml } = require("html-minifier-terser");
 
 const rootDir = path.resolve(__dirname, "..");
 const distDir = path.join(rootDir, "dist");
+const hexoBookshelfDir = "I:/Hexo/source/bookshelf";
 
 const cssFiles = [
   "base.css",
@@ -208,6 +209,14 @@ async function buildHtml() {
   writeUtf8(path.join(distDir, "index.html"), minified);
 }
 
+function syncToHexo() {
+  /**
+   * @Description 将 dist 构建产物同步到 Hexo 的 source/bookshelf 目录
+   */
+  fs.rmSync(hexoBookshelfDir, { recursive: true, force: true });
+  copyDir(distDir, hexoBookshelfDir);
+}
+
 async function main() {
   /**
    * @Description 执行完整构建流程
@@ -220,6 +229,11 @@ async function main() {
   await buildHtml();
 
   console.log("Build complete: dist");
+
+  if (process.argv.includes("--hexo")) {
+    syncToHexo();
+    console.log(`Synced to Hexo: ${hexoBookshelfDir}`);
+  }
 }
 
 main().catch(error => {
