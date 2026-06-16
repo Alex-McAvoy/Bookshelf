@@ -142,11 +142,10 @@ function renderBookList(bookList, options) {
         var $detail = $("<div>").addClass("detail");
 
         // 封面
-        var basePath = "./resources/images/books/";
         var imageSrc = (book.imageURL && book.imageURL.trim() !== "")
-            ? basePath + book.imageURL
-            : basePath + "default.png";
-        $image.append($("<img>").attr("src", imageSrc));
+            ? "./resources/images/webp/" + book.imageURL
+            : "./resources/images/books/default.png";
+        $image.append($("<img>").attr("src", imageSrc).attr("loading", "lazy").attr("decoding", "async"));
 
         // 详情模式
         var $name = $("<div>").addClass("name").append($("<span>").text("《" + book.name + "》"));
