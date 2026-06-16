@@ -1,32 +1,31 @@
 ﻿{
-    "name":  "bookshelf",
-    "version":  "1.0.0",
-    "description":  "托管于个人博客中的电子书架，个人阅读记录",
-    "main":  "index.js",
-    "scripts":  {
-                    "test":  "echo \"Error: no test specified\" \u0026\u0026 exit 1",
-                    "convert:covers":  "node scripts/convert-covers.js",
-                    "build":  "node scripts/build.js"
-                },
-    "repository":  {
-                       "type":  "git",
-                       "url":  "git+https://github.com/Alex-McAvoy/Bookshelf.git"
-                   },
-    "keywords":  [
-
-                 ],
-    "author":  "",
-    "license":  "ISC",
-    "type":  "commonjs",
-    "bugs":  {
-                 "url":  "https://github.com/Alex-McAvoy/Bookshelf/issues"
-             },
-    "homepage":  "https://github.com/Alex-McAvoy/Bookshelf#readme",
-    "devDependencies":  {
-                            "clean-css":  "^5.3.3",
-                            "html-minifier-terser":  "^7.2.0",
-                            "javascript-obfuscator":  "^5.4.3",
-                            "sharp":  "^0.35.1",
-                            "terser":  "^5.48.0"
-                        }
+    "name": "bookshelf",
+    "version": "1.0.0",
+    "description": "托管于个人博客中的电子书架，个人阅读记录",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" \u0026\u0026 exit 1",
+        "convert:covers": "node scripts/convert-covers.js",
+        "build": "node scripts/build.js",
+        "build:hexo": "node scripts/build.js --hexo"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Alex-McAvoy/Bookshelf.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "commonjs",
+    "bugs": {
+        "url": "https://github.com/Alex-McAvoy/Bookshelf/issues"
+    },
+    "homepage": "https://github.com/Alex-McAvoy/Bookshelf#readme",
+    "devDependencies": {
+        "clean-css": "^5.3.3",
+        "html-minifier-terser": "^7.2.0",
+        "javascript-obfuscator": "^5.4.3",
+        "sharp": "^0.35.1",
+        "terser": "^5.48.0"
+    }
 }
