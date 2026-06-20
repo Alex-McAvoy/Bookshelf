@@ -157,7 +157,7 @@ function renderBookList(bookList, options) {
                 $name.append(
                     $("<span>").addClass("comment-inline")
                         .append($("<span>").addClass("icon").text(" ⓘ"))
-                        .append($("<span>").addClass("content-small").text(book.comment))
+                        .append($("<span>").addClass("content-small").html(book.comment))
                 );
             } else if (book.comment.length < 400) {
                 $name.append(
