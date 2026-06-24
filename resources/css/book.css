@@ -172,12 +172,10 @@
 
 .bookInfo-detail .bookList .book .name .comment-inline .content-medium {
   width: 500px;
-  text-indent: 2em;
 }
 
 .bookInfo-detail .bookList .book .name .comment-inline .content-large {
   width: 700px;
-  text-indent: 2em;
 }
 
 .bookInfo-detail .bookList .book .name .comment-inline:hover .content-small,

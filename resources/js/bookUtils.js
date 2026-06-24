@@ -153,7 +153,7 @@ function renderBookList(bookList, options) {
             if (!book.comment) {
                 book.comment = "暂无";
             }
-            if (book.comment.length < 200) {
+            if (book.comment.length < 100) {
                 $name.append(
                     $("<span>").addClass("comment-inline")
                         .append($("<span>").addClass("icon").text(" ⓘ"))
@@ -274,7 +274,7 @@ function renderBookList(bookList, options) {
 
         // 结点
         var $info = $("<div>");
-        if (book.comment.length < 200) {
+        if (book.comment.length < 100) {
             $info.addClass("info-small hidden")
         } else if (book.comment.length < 400) {
             $info.addClass("info-medium hidden")
