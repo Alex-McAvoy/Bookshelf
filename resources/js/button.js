@@ -277,7 +277,8 @@ function refreshBookList() {
             wordFilter: wordFilter,
             categoryFilter: categoryFilter,
             showComment: true,
-            showRating: true
+            showRating: true,
+            order: "ReadYearAndRating"
         }));
     }
     // 按年分组
@@ -288,7 +289,8 @@ function refreshBookList() {
             pageFilter: pageFilter,
             wordFilter: wordFilter,
             showComment: true,
-            showRating: true
+            showRating: true,
+            order: "ReadYearAndRating"
         }));
     }
     // 按月分组
@@ -299,7 +301,8 @@ function refreshBookList() {
             pageFilter: pageFilter,
             wordFilter: wordFilter,
             showComment: true,
-            showRating: true
+            showRating: true,
+            order: "ReadYearAndRating"
         }));
     }
 
